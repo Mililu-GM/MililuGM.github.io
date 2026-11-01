@@ -1,175 +1,162 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plaga — Навигация</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plaga — Персонажи</title>
+<style>
+  :root{
+    --bg:#0e1117; --panel:#161b26; --panel-2:#1d2433;
+    --accent:#d4a857; --accent-soft:#8a6d34;
+    --text:#e8e4d9; --muted:#9aa3b2; --line:#2a3346;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Georgia","Times New Roman",serif; color:var(--text);
+    background:
+      radial-gradient(circle at 15% 0%, #2a1219 0%, transparent 55%),
+      radial-gradient(circle at 85% 100%, #221c14 0%, transparent 50%),
+      var(--bg);
+    line-height:1.65;
+    min-height:100vh;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #2b0a1e 0%, #7e0f3c 50%, #ee0979 100%);
-            padding: 20px;
-        }
+  /* ==================== ШАПКА ==================== */
+  header.hero{
+    position:relative;
+    text-align:center; padding:70px 20px 45px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(212,168,87,.08), transparent);
+  }
+  header.hero h1{
+    margin:0 0 10px; font-size:clamp(2rem,5vw,3.2rem);
+    letter-spacing:.06em; color:var(--accent);
+    text-shadow:0 0 24px rgba(212,168,87,.25);
+  }
+  header.hero p{margin:0; color:var(--muted); font-style:italic;}
 
-        .nav-container {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 24px;
-            padding: 50px 60px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
-            text-align: center;
-            max-width: 560px;
-            width: 100%;
-            animation: fadeIn 0.8s ease-out;
-        }
+  /* ==================== КНОПКА "НАЗАД" ==================== */
+  .back-btn{
+    position:absolute; top:24px; left:24px;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:9px 16px; border-radius:10px;
+    font-family:system-ui,sans-serif; font-size:.82rem;
+    letter-spacing:.08em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted);
+    background:rgba(22,27,38,.7);
+    border:1px solid var(--line);
+    backdrop-filter:blur(4px);
+    transition:color .25s, border-color .25s, background .25s, transform .2s;
+  }
+  .back-btn:hover, .back-btn:focus{
+    color:var(--accent);
+    border-color:var(--accent-soft);
+    background:var(--panel-2);
+    transform:translateX(-2px);
+    outline:none;
+  }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  /* ==================== КОНТЕНТ ==================== */
+  .wrap{max-width:1100px; margin:0 auto; padding:50px 20px 90px;}
 
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 10px 18px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            margin-bottom: 30px;
-        }
+  .grid{
+    display:grid; gap:20px;
+    grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+  }
 
-        .back-link:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            transform: translateX(-4px);
-        }
+  .card{
+    display:flex; align-items:center; gap:18px;
+    text-decoration:none; color:inherit;
+    background:var(--panel); border:1px solid var(--line);
+    border-left:4px solid var(--accent-soft); border-radius:14px;
+    padding:22px 24px;
+    transition:border-color .25s, transform .25s, background .25s, box-shadow .25s;
+  }
+  .card:hover, .card:focus{
+    border-left-color:var(--accent); background:var(--panel-2);
+    transform:translateY(-3px); outline:none;
+    box-shadow:0 12px 28px rgba(0,0,0,.35);
+  }
 
-        h1 {
-            color: #ffffff;
-            font-size: 2.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #ff6b6b, #ee0979, #ffd93d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+  .card .icon{
+    width:46px; height:46px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; flex-shrink:0;
+    background:var(--panel-2); border:1px solid var(--line);
+    transition:border-color .25s, background .25s;
+  }
+  .card:hover .icon{
+    border-color:var(--accent-soft);
+    background:rgba(212,168,87,.1);
+  }
 
-        .subtitle {
-            color: rgba(255, 255, 255, 0.55);
-            font-size: 0.9rem;
-            margin-bottom: 40px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+  .card .card-body{flex:1; text-align:left; min-width:0;}
+  .card h2{margin:0 0 4px; font-size:1.25rem; color:var(--accent);}
+  .card .type{
+    display:block; font-family:system-ui,sans-serif; font-size:.66rem;
+    text-transform:uppercase; letter-spacing:.16em; color:var(--muted);
+  }
 
-        .links { display: flex; flex-direction: column; gap: 16px; }
+  .card .arrow{
+    font-size:1.2rem; color:var(--muted);
+    transition:color .25s, transform .25s;
+  }
+  .card:hover .arrow{
+    color:var(--accent);
+    transform:translateX(4px);
+  }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 18px 24px;
-            border-radius: 16px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            overflow: hidden;
-        }
+  /* ==================== ПОДВАЛ ==================== */
+  footer{
+    text-align:center; padding:30px 20px 50px;
+    border-top:1px solid var(--line);
+    color:var(--muted); font-size:.85rem; font-style:italic;
+  }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .nav-link:hover::before { left: 100%; }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(238, 9, 121, 0.6);
-            transform: translateX(8px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(238, 9, 121, 0.3);
-        }
-
-        .link-icon {
-            width: 42px; height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            margin-right: 16px;
-            flex-shrink: 0;
-            background: linear-gradient(135deg, #ff6b6b, #ee0979);
-            color: #fff;
-        }
-
-        .link-icon.grigor {
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-        }
-
-        .link-text { flex: 1; text-align: left; }
-
-        .link-arrow {
-            font-size: 1.4rem;
-            opacity: 0.6;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover .link-arrow {
-            opacity: 1;
-            transform: translateX(5px);
-        }
-
-        @media (max-width: 480px) {
-            .nav-container { padding: 35px 25px; }
-            h1 { font-size: 1.8rem; }
-            .nav-link { padding: 14px 18px; font-size: 1rem; }
-        }
-    </style>
+  /* ==================== АДАПТИВ ==================== */
+  @media (max-width:520px){
+    header.hero{padding-top:80px;}
+    .back-btn{top:18px; left:16px; padding:7px 12px; font-size:.72rem;}
+    .card{padding:18px 20px;}
+    .card .icon{width:40px; height:40px; font-size:1.1rem;}
+  }
+</style>
 </head>
 <body>
-    <div class="nav-container">
-        <a href="Personagi\PersonagiIgrokov.html" class="back-link">← На главную</a>
 
-        <h1>Plaga</h1>
-        <p class="subtitle">Персонажи</p>
+<header class="hero">
+  <a class="back-btn" href="../PersonagiIgrokov.html">← Назад</a>
+  <h1>Plaga</h1>
+  <p>Персонажи</p>
+</header>
 
-        <nav class="links">
-            <a href="Barsodi\MaksimilianBarsodi.html" class="nav-link">
-                <span class="link-icon">🐺</span>
-                <span class="link-text">Максимилиан Барсоди</span>
-                <span class="link-arrow">→</span>
-            </a>
+<div class="wrap">
+  <div class="grid">
 
-            <a href="Grigor.html" class="nav-link">
-                <span class="link-icon grigor">🔥</span>
-                <span class="link-text">Григор</span>
-                <span class="link-arrow">→</span>
-            </a>
-        </nav>
-    </div>
+    <a class="card" href="Barsodi/MaksimilianBarsodi.html">
+      <span class="icon">🐺</span>
+      <span class="card-body">
+        <h2>Максимилиан Барсоди</h2>
+        <span class="type">Персонаж</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="card" href="Grigor.html">
+      <span class="icon">🔥</span>
+      <span class="card-body">
+        <h2>Григор</h2>
+        <span class="type">Персонаж</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <p>© Plaga · Персонажи</p>
+</footer>
+
 </body>
 </html>
