@@ -20,6 +20,7 @@
     line-height:1.65;
   }
   header.hero{
+    position:relative;
     text-align:center; padding:70px 20px 45px; border-bottom:1px solid var(--line);
     background:linear-gradient(180deg, rgba(212,168,87,.08), transparent);
   }
@@ -29,6 +30,27 @@
     text-shadow:0 0 24px rgba(212,168,87,.25);
   }
   header.hero p{margin:0; color:var(--muted); font-style:italic;}
+
+  /* Кнопка "Назад" */
+  .back-btn{
+    position:absolute; top:24px; left:24px;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:9px 16px; border-radius:10px;
+    font-family:system-ui,sans-serif; font-size:.82rem;
+    letter-spacing:.08em; text-transform:uppercase;
+    text-decoration:none; color:var(--muted);
+    background:rgba(22,27,38,.7);
+    border:1px solid var(--line);
+    backdrop-filter:blur(4px);
+    transition:color .25s, border-color .25s, background .25s, transform .2s;
+  }
+  .back-btn:hover, .back-btn:focus{
+    color:var(--accent);
+    border-color:var(--accent-soft);
+    background:var(--panel-2);
+    transform:translateX(-2px);
+    outline:none;
+  }
 
   .wrap{max-width:1100px; margin:0 auto; padding:50px 20px 90px;}
 
@@ -58,11 +80,18 @@
     text-align:center; padding:30px 20px 50px; border-top:1px solid var(--line);
     color:var(--muted); font-size:.85rem; font-style:italic;
   }
+
+  /* На узких экранах кнопка не перекрывает заголовок */
+  @media (max-width:520px){
+    header.hero{padding-top:80px;}
+    .back-btn{top:18px; left:16px; padding:7px 12px; font-size:.72rem;}
+  }
 </style>
 </head>
 <body>
 
 <header class="hero">
+  <a class="back-btn" href="../index.html">← Назад</a>
   <h1>География Мериона</h1>
   <p>Атлас земель, вод и запредельных сфер</p>
 </header>
