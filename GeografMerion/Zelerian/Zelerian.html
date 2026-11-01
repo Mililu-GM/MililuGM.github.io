@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Зелерьен — Летопись Зелёного Края</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Marcellus&display=swap" rel="stylesheet">
+<style>
+/* ═══════════ ДАРЫ МАГИИ — расширенный раздел ═══════════ */
+
+.magic-intro{
+  text-align:center;
+  max-width:660px;
+  margin:0 auto 2.2em;
+  font-style:italic;
+  color:var(--ink-soft);
+  line-height:1.8;
+}
+.magic-intro::before,
+.magic-intro::after{
+  content:'✦ ❦ ✦';
+  display:block;
+  color:var(--gold);
+  letter-spacing:.8em;
+  padding-left:.8em;
+  font-style:normal;
+  font-size:.85em;
+  margin:.8em 0;
+}
+
+.magic-tier{margin:2.2em 0 1em;}
+.magic-tier h3{
+  font-size:1.35em;
+  color:var(--forest-deep);
+  margin:0 0 .3em;
+  padding-bottom:.25em;
+  border-bottom:1px solid rgba(142,163,110,0.45);
+  position:relative;
+}
+.magic-tier h3::after{
+  content:'❦';
+  position:absolute;
+  right:0;top:.1em;
+  color:var(--gold);
+  font-size:.6em;
+  opacity:.8;
+}
+.magic-tier .tier-sub{
+  font-style:italic;
+  color:var(--moss);
+  font-size:.92em;
+  margin:0 0 1.1em;
+}
+
+.magic-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.1em;
+  margin:1em 0 1.8em;
+}
+@media(max-width:680px){.magic-grid{grid-template-columns:1fr;}}
+
+.magic-card{
+  position:relative;
+  padding:1.1em 1.3em 1.1em 3.4em;
+  background:linear-gradient(180deg,var(--parchment-light),rgba(245,241,223,0.65));
+  border:1px solid rgba(142,163,110,0.4);
+  border-left:3px solid var(--moss);
+  border-radius:4px;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.magic-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 22px rgba(42,61,30,0.15);
+  border-left-color:var(--gold);
+}
+.magic-card .magic-icon{
+  position:absolute;
+  left:.9em;top:1em;
+  font-size:1.4em;
+  line-height:1;
+  width:1.5em;height:1.5em;
+  display:flex;align-items:center;justify-content:center;
+}
+.magic-card h4{
+  margin:0 0 .3em;
+  font-size:1.08em;
+  color:var(--forest-deep);
+  font-family:'Marcellus',serif;
+  letter-spacing:.3px;
+}
+.magic-card p{
+  margin:0;
+  font-size:.92em;
+  line-height:1.6;
+  color:var(--ink-soft);
+  text-align:left;
+}
+.magic-card .magic-example{
+  display:block;
+  margin-top:.5em;
+  font-size:.82em;
+  font-style:italic;
+  color:var(--moss);
+}
+
+.elements-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.9em;
+  margin:1em 0 1.4em;
+}
+@media(max-width:680px){.elements-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:440px){.elements-grid{grid-template-columns:1fr;}}
+.element-card{
+  padding:.85em 1em .85em 2.9em;
+  background:linear-gradient(180deg,var(--parchment-light),rgba(245,241,223,0.65));
+  border:1px solid rgba(142,163,110,0.4);
+  border-radius:4px;
+  position:relative;
+  transition:transform .25s,box-shadow .25s;
+}
+.element-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 18px rgba(42,61,30,0.13);
+}
+.element-card .element-icon{
+  position:absolute;
+  left:.8em;top:.85em;
+  font-size:1.25em;
+  line-height:1;
+}
+.element-card h5{
+  margin:0 0 .15em;
+  font-family:'Marcellus',serif;
+  font-size:1em;
+  color:var(--forest-deep);
+  letter-spacing:.3px;
+}
+.element-card p{
+  margin:0;
+  font-size:.85em;
+  color:var(--ink-soft);
+  line-height:1.5;
+  text-align:left;
+}
+
+.magic-note{
+  margin:1.6em 0 .5em;
+  padding:1em 1.3em 1em 3em;
+  background:linear-gradient(90deg,rgba(184,149,46,0.10),rgba(184,149,46,0.03));
+  border-left:3px solid var(--gold);
+  border-radius:0 4px 4px 0;
+  font-style:italic;
+  font-size:.94em;
+  color:var(--ink-soft);
+  line-height:1.65;
+  position:relative;
+}
+.magic-note::before{
+  content:'❦';
+  position:absolute;
+  left:1.1em;top:.9em;
+  color:var(--gold);
+  font-style:normal;
+  font-size:1.1em;
+}
+.magic-note strong{color:var(--forest-deep);}
+:root{
+  --forest-deep:#2a3d1e;
+  --forest:#3d5a2e;
+  --forest-soft:#4a6b3a;
+  --moss:#6a8a4a;
+  --sage:#a8b98a;
+  --water:#4f7a6e;
+  --parchment:#f5f1df;
+  --parchment-light:#fbf8ea;
+  --ink:#2a2418;
+  --ink-soft:#4a4434;
+  --gold:#b8952e;
+  --gold-soft:#d4b960;
+  --line:#8ea36e;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+/* ═══════════ ФОН: ЛЕС + МАГИЯ ═══════════ */
+body{
+  margin:0;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:19px;
+  line-height:1.75;
+  color:var(--ink);
+  min-height:100vh;
+
+  background-color:#15220e;
+  background-image:
+    /* мелкие светлячки */
+    radial-gradient(circle, rgba(240,220,140,0.75) 1px, transparent 1.7px),
+    /* средние светлячки */
+    radial-gradient(circle, rgba(212,185,96,0.55) 1.6px, transparent 2.3px),
+    /* крупные фантомные блики */
+    radial-gradient(circle, rgba(168,185,138,0.32) 2.4px, transparent 3.2px),
+    /* луч света сверху-слева */
+    radial-gradient(ellipse 70% 60% at 22% 0%, rgba(212,185,96,0.16), transparent 65%),
+    /* второй луч сверху-справа */
+    radial-gradient(ellipse 55% 50% at 82% 5%, rgba(168,185,138,0.12), transparent 65%),
+    /* тёмная крона сверху */
+    radial-gradient(ellipse 130% 45% at 50% 0%, rgba(0,0,0,0.55), transparent 75%),
+    /* туман снизу */
+    radial-gradient(ellipse 100% 40% at 50% 100%, rgba(79,122,110,0.32), transparent 70%),
+    /* основа */
+    linear-gradient(180deg,#16220f 0%,#1e2f16 25%,#243818 50%,#1a2814 75%,#0f1a0a 100%);
+  background-size:
+    170px 170px,
+    260px 260px,
+    380px 380px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  background-repeat: repeat, repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-position: 0 0, 40px 60px, 80px 20px,
+                       center top, center top, center top, center bottom, center;
+  background-attachment: fixed;
+}
+
+h1,h2,h3,h4{
+  font-family:'Marcellus','Cormorant Garamond',serif;
+  color:var(--forest-deep);
+  letter-spacing:.4px;
+  line-height:1.25;
+}
+p{margin:0 0 1em;text-align:justify;}
+
+/* ═══════════ БУКВИЦА (общая) ═══════════ */
+p.first::first-letter{
+  font-family:'Marcellus',serif;
+  float:left;
+  font-size:3.2em;
+  line-height:0.85;
+  padding:0 .1em 0 0;
+  margin-top:.03em;
+  color:var(--forest);
+  font-weight:600;
+}
+
+/* ═══════════ ЛИСТ-СТРАНИЦА ═══════════ */
+.page{
+  max-width:920px;
+  margin:60px auto;
+  padding:80px 56px 90px;
+  position:relative;
+  background:
+    repeating-linear-gradient(0deg,
+      rgba(168,185,138,0.025) 0 2px, transparent 2px 4px),
+    linear-gradient(180deg,
+      rgba(251,248,234,0.95) 0%,
+      rgba(245,241,223,0.92) 50%,
+      rgba(251,248,234,0.95) 100%);
+  box-shadow:
+    0 0 0 1px rgba(184,149,46,0.4),
+    0 0 60px rgba(0,0,0,0.5),
+    0 30px 90px rgba(0,0,0,0.45),
+    inset 0 0 100px rgba(168,185,138,0.08);
+}
+.page::before,
+.page::after{
+  content:'';
+  position:absolute;
+  width:50px;height:50px;
+  border:solid var(--gold);
+  border-width:0;
+  opacity:.55;
+  pointer-events:none;
+}
+.page::before{
+  top:18px;left:18px;
+  border-top-width:2px;
+  border-left-width:2px;
+}
+.page::after{
+  bottom:18px;right:18px;
+  border-bottom-width:2px;
+  border-right-width:2px;
+}
+@media(max-width:720px){
+  .page{margin:20px 10px;padding:40px 22px 60px;}
+  body{font-size:17px;}
+}
+
+/* ═══════════ ТИТУЛ ═══════════ */
+.title-page{
+  text-align:center;
+  padding:50px 0 70px;
+  border-bottom:1px solid var(--sage);
+  position:relative;
+}
+.title-page::after{
+  content:'❦';
+  position:absolute;
+  bottom:-14px;left:50%;
+  transform:translateX(-50%);
+  background:var(--parchment-light);
+  padding:0 14px;
+  color:var(--gold);
+  font-size:1.4em;
+}
+.title-page .ornament{
+  color:var(--moss);
+  letter-spacing:1em;
+  font-size:.9em;
+  margin-bottom:18px;
+  padding-left:1em;
+}
+.title-page h1{
+  font-size:3.4em;
+  margin:0 0 .15em;
+  color:var(--forest-deep);
+  text-shadow:1px 1px 0 rgba(212,185,96,0.35);
+}
+.title-page .subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.3em;
+  color:var(--forest);
+  margin:0 0 1.2em;
+}
+.title-page .author{
+  font-family:'Marcellus',serif;
+  font-size:.85em;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--moss);
+  margin-top:2em;
+}
+.title-page .author span{
+  display:block;
+  letter-spacing:.05em;
+  text-transform:none;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.25em;
+  margin-top:.4em;
+  color:var(--ink-soft);
+}
+
+/* ═══════════ РАЗДЕЛИТЕЛЬ ═══════════ */
+.divider{
+  text-align:center;
+  margin:2.5em 0;
+  color:var(--sage);
+  letter-spacing:1.2em;
+  padding-left:1.2em;
+  user-select:none;
+}
+.divider::before,
+.divider::after{
+  content:'';
+  display:inline-block;
+  vertical-align:middle;
+  width:80px;height:1px;
+  background:linear-gradient(to right,transparent,var(--sage),transparent);
+  margin:0 1em;
+}
+
+/* ═══════════ ЗАГОЛОВКИ ═══════════ */
+h2{
+  font-size:2.1em;
+  border-bottom:2px solid var(--sage);
+  padding-bottom:.25em;
+  margin:2.6em 0 1em;
+  position:relative;
+}
+h2::after{
+  content:'';
+  position:absolute;
+  bottom:-2px;left:0;
+  width:80px;height:2px;
+  background:var(--gold);
+}
+h3{font-size:1.6em;color:var(--forest);margin:1em 0 .3em;}
+h4{font-size:1.15em;color:var(--forest);margin:.8em 0 .2em;}
+
+/* ═══════════ ОГЛАВЛЕНИЕ ═══════════ */
+.toc{
+  margin:2.5em 0;
+  padding:1.6em 2em;
+  background:rgba(168,185,138,0.12);
+  border-left:3px solid var(--moss);
+  border-radius:4px;
+}
+.toc h3{
+  margin-top:0;
+  font-size:1.2em;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--forest);
+  font-family:'Marcellus',serif;
+}
+.toc ol{
+  margin:0;
+  padding-left:1.4em;
+  columns:2;
+  column-gap:2.5em;
+}
+.toc ol li{margin:.3em 0;}
+.toc a{
+  color:var(--ink-soft);
+  text-decoration:none;
+  border-bottom:1px dotted var(--sage);
+  transition:color .2s;
+}
+.toc a:hover{color:var(--forest);border-bottom-color:var(--gold);}
+@media(max-width:600px){.toc ol{columns:1;}}
+
+/* ═══════════ ДОМА ═══════════ */
+.house{
+  margin:3em 0 4em;
+  padding:2em 2.2em;
+  background:
+    linear-gradient(180deg,rgba(251,248,234,0.7),rgba(245,241,223,0.5));
+  border:1px solid rgba(142,163,110,0.4);
+  border-radius:6px;
+  position:relative;
+}
+.house::before{
+  content:'❦';
+  position:absolute;
+  top:-14px;left:2.5em;
+  background:var(--parchment-light);
+  padding:0 14px;
+  color:var(--gold);
+  font-size:1.3em;
+}
+.house-header{text-align:center;margin-bottom:1.8em;}
+.house-header h3{
+  font-size:1.9em;
+  margin:0 0 .2em;
+  color:var(--forest-deep);
+}
+.house-header .house-subtitle{
+  font-style:italic;
+  color:var(--moss);
+  margin:0 0 .3em;
+  font-size:1em;
+}
+.house-header .motto{
+  font-family:'Marcellus',serif;
+  color:var(--gold);
+  font-size:.95em;
+  letter-spacing:.08em;
+  margin:0;
+}
+.house-header .motto::before,
+.house-header .motto::after{
+  content:'—';
+  color:var(--sage);
+  margin:0 .5em;
+}
+
+/* ═══════════ ЧЛЕНЫ СЕМЬИ ═══════════ */
+.members{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2em;
+  margin:1.5em 0 2em;
+}
+@media(max-width:700px){.members{grid-template-columns:1fr;}}
+.member-card{
+  position:relative;
+  padding:1.1em 1.3em;
+  background:linear-gradient(180deg,var(--parchment-light),rgba(245,241,223,0.65));
+  border:1px solid rgba(142,163,110,0.4);
+  border-top:3px solid var(--moss);
+  border-radius:4px;
+  transition:transform .25s, box-shadow .25s, border-color .25s;
+}
+.member-card:hover{
+  border-top-color:var(--gold);
+  box-shadow:0 6px 22px rgba(42,61,30,0.15);
+  transform:translateY(-2px);
+}
+.member-card h4{
+  margin:0 0 .2em;
+  font-size:1.15em;
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:.5em;
+}
+.member-card h4 .age{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:.8em;
+  font-weight:400;
+  color:var(--moss);
+  white-space:nowrap;
+}
+.member-card .member-meta{
+  font-size:.85em;
+  color:var(--forest);
+  margin:0 0 .6em;
+  font-style:italic;
+  text-align:left;
+}
+.member-card p{font-size:.94em;margin:0 0 .5em;line-height:1.6;}
+.member-card .magic{
+  display:inline-block;
+  font-family:'Marcellus',serif;
+  font-size:.8em;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:.2em .7em;
+  border-radius:20px;
+  margin-top:.5em;
+}
+.magic.none{background:rgba(168,185,138,0.25);color:var(--ink-soft);}
+.magic.nature{background:rgba(106,138,74,0.22);color:var(--forest-deep);}
+.magic.light{background:rgba(212,185,96,0.28);color:#6b5410;}
+.magic.holy{background:rgba(232,224,192,0.7);color:#6b5410;border:1px solid var(--gold-soft);}
+.magic.heal{background:rgba(79,122,110,0.20);color:var(--water);}
+.magic.transf{background:rgba(138,90,110,0.18);color:#6a3a4a;}
+.magic.invoc{background:rgba(74,80,140,0.15);color:#2e346b;}
+
+/* ═══════════ ДРЕВО ═══════════ */
+.tree-container{
+  margin-top:1.8em;
+  padding-top:1.5em;
+  border-top:1px dashed var(--sage);
+}
+.tree-container h4{
+  text-align:center;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-size:.85em;
+  color:var(--moss);
+  margin:0 0 1em;
+}
+.tree{
+  font-family:'Marcellus',serif;
+  font-size:.92em;
+  overflow-x:auto;
+  padding:.5em 0 1em;
+}
+.tree ul{
+  list-style:none;
+  margin:0;
+  padding-left:1.6em;
+  border-left:1.5px solid var(--line);
+}
+.tree > ul{border-left:none;padding-left:0;}
+.tree li{margin:0;padding:5px 0;position:relative;}
+.tree li::before{
+  content:'';
+  position:absolute;
+  left:-1.6em;top:1.55em;
+  width:1.25em;height:0;
+  border-top:1.5px solid var(--line);
+}
+.tree > ul > li::before{display:none;}
+.node{
+  display:inline-block;
+  padding:5px 14px;
+  background:var(--parchment-light);
+  border:1.5px solid var(--moss);
+  border-radius:6px;
+  color:var(--forest-deep);
+  line-height:1.3;
+  font-size:.95em;
+  transition:all .2s;
+}
+.node.root{
+  background:linear-gradient(135deg,var(--forest),var(--forest-deep));
+  color:var(--parchment-light);
+  border-color:var(--gold);
+  font-weight:bold;
+}
+.node.lord{
+  background:linear-gradient(135deg,#eee6c8,#d9d2a8);
+  border-color:var(--gold);
+  font-weight:600;
+  color:#4a3a10;
+}
+.node.dead{
+  opacity:.65;
+  font-style:italic;
+  border-style:dashed;
+  border-color:var(--sage);
+  color:var(--ink-soft);
+}
+.node .spouse{
+  color:var(--moss);
+  font-style:italic;
+  font-weight:normal;
+  font-size:.9em;
+}
+.node.root .spouse,
+.node.lord .spouse{color:rgba(251,248,234,0.85);}
+
+/* ═══════════ ЛЕГЕНДЫ ═══════════ */
+.legends-shell{position:relative;margin:2em 0;padding:1em 0;}
+.legends-intro{
+  text-align:center;
+  max-width:640px;
+  margin:0 auto 2.5em;
+  font-style:italic;
+  color:var(--ink-soft);
+  font-size:1.02em;
+  line-height:1.8;
+}
+.legends-intro::before,
+.legends-intro::after{
+  content:'✦ ❦ ✦';
+  display:block;
+  color:var(--gold);
+  letter-spacing:.8em;
+  padding-left:.8em;
+  font-style:normal;
+  font-size:.85em;
+  margin:.8em 0;
+}
+.legend-verse{
+  position:relative;
+  margin:2.5em 0;
+  padding:2.4em 2.2em 2em 5.2em;
+  background:linear-gradient(180deg,rgba(251,248,234,0.92),rgba(245,241,223,0.7));
+  border:1px solid rgba(142,163,110,0.4);
+  border-radius:8px;
+  box-shadow:0 3px 20px rgba(42,61,30,0.07);
+  overflow:hidden;
+  transition:box-shadow .3s,transform .3s;
+}
+.legend-verse:hover{
+  box-shadow:0 6px 28px rgba(42,61,30,0.14);
+  transform:translateY(-2px);
+}
+.legend-verse::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:4px;
+  background:linear-gradient(180deg,var(--moss),var(--forest-deep),var(--moss));
+}
+.legend-verse::after{
+  content:'';
+  position:absolute;
+  right:-30px;bottom:-30px;
+  width:120px;height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(212,185,96,0.14),transparent 70%);
+  pointer-events:none;
+}
+.legend-numeral{
+  position:absolute;
+  left:1.5em;top:1.6em;
+  width:2.4em;height:2.4em;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Marcellus',serif;
+  font-size:1.05em;
+  font-weight:bold;
+  color:var(--gold-soft);
+  background:linear-gradient(135deg,var(--forest),var(--forest-deep));
+  border:2px solid var(--gold);
+  box-shadow:
+    0 0 0 4px var(--parchment-light),
+    0 0 0 5px var(--sage),
+    0 2px 8px rgba(42,61,30,0.2);
+  z-index:2;
+}
+.legend-verse h4{
+  font-size:1.55em;
+  margin:0 0 .7em;
+  color:var(--forest-deep);
+  font-family:'Marcellus',serif;
+  padding-bottom:.35em;
+  border-bottom:1px solid rgba(142,163,110,0.45);
+  position:relative;
+  letter-spacing:.5px;
+}
+.legend-verse h4::after{
+  content:'❦';
+  position:absolute;
+  right:0;top:.1em;
+  color:var(--gold);
+  font-size:.65em;
+  opacity:.8;
+}
+.legend-verse p{
+  font-size:1em;
+  line-height:1.82;
+  text-align:justify;
+  margin:0 0 .85em;
+  color:var(--ink);
+}
+
+/* ⚠️ ИСПРАВЛЕНИЕ БУКВИЦЫ: применяем только к первому абзацу ПОСЛЕ эпиграфа */
+.legend-verse p.epigraph + p::first-letter{
+  font-family:'Marcellus',serif;
+  float:left;
+  font-size:3.1em;
+  line-height:.85;
+  padding:0 .1em 0 0;
+  margin-top:.02em;
+  color:var(--forest);
+  font-weight:600;
+}
+
+.legend-verse .epigraph{
+  font-style:italic;
+  font-size:.94em;
+  color:var(--moss);
+  text-align:center;
+  margin:-.3em 0 1.1em;
+  padding-bottom:.8em;
+  border-bottom:1px dotted rgba(142,163,110,0.5);
+}
+.legend-verse .dialogue{
+  display:block;
+  margin:1em 0 1em 1.5em;
+  padding-left:1.1em;
+  border-left:2px solid var(--sage);
+  font-style:italic;
+  color:var(--ink-soft);
+  line-height:1.7;
+}
+.legend-verse .dialogue strong{color:var(--forest-deep);font-style:normal;}
+.legend-verse .chant{
+  display:block;
+  margin:1.2em auto;
+  max-width:80%;
+  padding:1em 1.4em;
+  text-align:center;
+  font-style:italic;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.02em;
+  line-height:1.65;
+  color:var(--forest);
+  background:linear-gradient(180deg,rgba(168,185,138,0.10),rgba(168,185,138,0.04));
+  border-top:1px solid rgba(142,163,110,0.4);
+  border-bottom:1px solid rgba(142,163,110,0.4);
+  border-radius:2px;
+}
+.legend-verse .chant::before,
+.legend-verse .chant::after{
+  content:'❦';
+  display:block;
+  color:var(--gold);
+  font-style:normal;
+  font-size:.85em;
+  letter-spacing:.3em;
+  padding-left:.3em;
+}
+.legend-verse .chant::before{margin-bottom:.4em;}
+.legend-verse .chant::after{margin-top:.4em;}
+.legend-verse .scene-break{
+  display:block;
+  text-align:center;
+  color:var(--gold);
+  letter-spacing:.7em;
+  padding-left:.7em;
+  margin:1.3em 0;
+  font-size:.9em;
+}
+.legend-verse .aside{
+  font-size:.93em;
+  color:var(--ink-soft);
+  font-style:italic;
+  text-align:left;
+  margin:.6em 0 1em;
+  line-height:1.7;
+}
+.legend-verse .warning{
+  display:block;
+  margin:1.2em 0 .8em;
+  padding:.85em 1.1em .85em 2.6em;
+  background:linear-gradient(90deg,rgba(184,149,46,0.10),rgba(184,149,46,0.03));
+  border-left:3px solid var(--gold);
+  border-radius:0 4px 4px 0;
+  font-style:italic;
+  font-size:.94em;
+  color:var(--ink-soft);
+  position:relative;
+  line-height:1.6;
+}
+.legend-verse .warning::before{
+  content:'⚠';
+  position:absolute;
+  left:.9em;top:.75em;
+  color:var(--gold);
+  font-size:1.1em;
+  font-style:normal;
+}
+.legend-verse .attribution{
+  display:block;
+  margin-top:1.3em;
+  padding-top:.9em;
+  border-top:1px dashed rgba(142,163,110,0.55);
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:.9em;
+  color:var(--moss);
+  text-align:right;
+  letter-spacing:.3px;
+}
+.legend-verse .attribution::before{
+  content:'— ';
+  color:var(--gold);
+  font-style:normal;
+  font-family:'Marcellus',serif;
+}
+@media(max-width:600px){
+  .legend-verse{padding:2em 1.2em 1.6em 1.4em;}
+  .legend-numeral{position:static;margin-bottom:1em;}
+  .legend-verse h4{font-size:1.3em;}
+  .legend-verse p.epigraph + p::first-letter{font-size:2.8em;}
+}
+
+/* ═══════════ КАРТА ═══════════ */
+.map-page{
+  margin:2em 0 3em;
+  padding:2em 1.6em 1.4em;
+  background:radial-gradient(ellipse at center,rgba(251,248,234,0.88),rgba(245,241,223,0.55));
+  border:1px solid rgba(142,163,110,0.45);
+  border-radius:6px;
+  position:relative;
+  box-shadow:inset 0 0 40px rgba(168,185,138,0.12),0 4px 20px rgba(42,61,30,0.08);
+}
+.map-page::before,
+.map-page::after{
+  content:'';
+  position:absolute;
+  width:26px;height:26px;
+  border:2px solid var(--gold);
+  pointer-events:none;
+}
+.map-page::before{top:8px;left:8px;border-right:none;border-bottom:none;}
+.map-page::after{bottom:8px;right:8px;border-left:none;border-top:none;}
+.map-header{text-align:center;margin-bottom:1.4em;}
+.map-header h2{
+  font-family:'Marcellus',serif;
+  font-size:1.55em;
+  color:var(--forest-deep);
+  margin:0 0 .25em;
+  border-bottom:none;
+  padding-bottom:0;
+  letter-spacing:.12em;
+}
+.map-header h2::after{display:none;}
+.map-header .map-subtitle{
+  font-style:italic;
+  color:var(--moss);
+  font-size:.98em;
+  margin:0;
+  letter-spacing:.05em;
+}
+.map-header .map-subtitle::before,
+.map-header .map-subtitle::after{
+  content:'·';
+  margin:0 .7em;
+  color:var(--gold);
+}
+.map-frame{
+  position:relative;
+  border:2px double var(--forest-soft);
+  border-radius:4px;
+  padding:8px;
+  background:rgba(255,255,255,0.35);
+}
+.map-placeholder{
+  position:relative;
+  aspect-ratio:4 / 3;
+  width:100%;
+  background:
+    repeating-linear-gradient(45deg,rgba(168,185,138,0.08) 0 12px,transparent 12px 24px),
+    radial-gradient(ellipse at 50% 50%,rgba(106,138,74,0.14),rgba(245,241,223,0.4));
+  border-radius:3px;
+  overflow:hidden;
+}
+.map-placeholder::before{
+  content:'';
+  position:absolute;
+  inset:16px;
+  border:1px dashed rgba(142,163,110,0.5);
+  border-radius:2px;
+  pointer-events:none;
+  z-index:1;
+}
+.map-fallback{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.7em;
+  padding:1.5em;
+  text-align:center;
+  color:var(--moss);
+}
+.map-fallback .map-compass{
+  font-size:2.4em;
+  color:var(--forest-soft);
+  line-height:1;
+  opacity:.7;
+  font-family:'Marcellus',serif;
+}
+.map-fallback .map-label{
+  font-family:'Marcellus',serif;
+  font-size:1.2em;
+  color:var(--forest);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.map-fallback .map-hint{
+  font-style:italic;
+  font-size:.88em;
+  color:var(--ink-soft);
+  max-width:34ch;
+  line-height:1.55;
+}
+.map-fallback .map-hint code{
+  font-family:'Courier New',monospace;
+  font-size:.9em;
+  background:rgba(168,185,138,0.2);
+  padding:.05em .35em;
+  border-radius:3px;
+  color:var(--forest-deep);
+}
+.map-placeholder img{
+  position:absolute;
+  inset:8px;
+  width:calc(100% - 16px);
+  height:calc(100% - 16px);
+  object-fit:contain;
+  border-radius:2px;
+  box-shadow:0 2px 12px rgba(42,61,30,0.25);
+  background:rgba(251,248,234,0.5);
+  z-index:2;
+}
+.map-caption{
+  text-align:center;
+  font-style:italic;
+  font-size:.88em;
+  color:var(--moss);
+  margin:1em 0 0;
+  padding-top:.8em;
+  border-top:1px dashed rgba(142,163,110,0.5);
+}
+.map-caption::before{
+  content:'❦';
+  color:var(--gold);
+  margin-right:.6em;
+}
+@media(max-width:600px){
+  .map-page{padding:1.4em 1em;}
+  .map-header h2{font-size:1.25em;}
+  .map-fallback .map-compass{font-size:1.9em;}
+  .map-fallback .map-label{font-size:1em;}
+}
+
+/* ═══════════ МЕЛОЧИ / ПОДВАЛ ═══════════ */
+em{color:var(--ink-soft);}
+strong{color:var(--forest-deep);}
+.note{
+  font-size:.9em;
+  color:var(--ink-soft);
+  font-style:italic;
+  text-align:center;
+  margin:2em 0;
+}
+footer{
+  margin-top:4em;
+  padding-top:2em;
+  border-top:1px solid var(--sage);
+  text-align:center;
+  font-style:italic;
+  color:var(--moss);
+  font-size:.92em;
+}
+footer .ornament{
+  color:var(--gold);
+  letter-spacing:.8em;
+  padding-left:.8em;
+  display:block;
+  margin-bottom:.8em;
+}
+/* ═══════════ НОВЫЕ ТИПЫ МАГИИ (по стихиям и энерго) ═══════════ */
+.magic.fire{background:rgba(200,100,50,0.20);color:#8b3a1a;border:1px solid rgba(200,100,50,0.35);}
+.magic.water{background:rgba(70,120,160,0.20);color:#2e5c7a;border:1px solid rgba(70,120,160,0.35);}
+.magic.air{background:rgba(200,220,240,0.35);color:#4a5c7a;border:1px solid rgba(150,180,210,0.4);}
+.magic.earth{background:rgba(140,110,80,0.20);color:#5a4020;border:1px solid rgba(140,110,80,0.35);}
+.magic.lightning{background:rgba(200,180,60,0.22);color:#8a6a10;border:1px solid rgba(200,180,60,0.35);}
+.magic.cold{background:rgba(160,200,220,0.28);color:#3a6a7a;border:1px solid rgba(160,200,220,0.4);}
+.magic.energy{background:rgba(120,100,180,0.18);color:#4a3080;border:1px solid rgba(120,100,180,0.3);}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ─────────── ТИТУЛ ─────────── -->
+  <header class="title-page">
+    <div class="ornament">✦ ❦ ✦</div>
+    <h1>Зелерьен</h1>
+    <p class="subtitle">Летопись Зелёного Края</p>
+    <p class="author">
+      Составлено в Тарн-Але
+      <span>Магистром Келленом Странником,<br>хранителем древностей и очевидцем</span>
+    </p>
+  </header>
+    <!-- ─────────── КАРТА ЗЕЛЕРЬЕНА ─────────── -->
+  <section class="map-page">
+    <div class="map-header">
+      <h2>Карта Зелерьена</h2>
+      <p class="map-subtitle">Земли зелёные, воды тихие, горы дальние</p>
+    </div>
+
+    <div class="map-frame">
+      <div class="map-placeholder">
+        <div class="map-fallback">
+          <div class="map-compass">✦</div>
+          <div class="map-label">Здесь будет карта</div>
+          </div>
+        <img src="zelerien-map.png" alt="Карта Зелерьена" onerror="this.remove()" loading="lazy">
+      </div>        
+    </div>
+
+    <p class="map-caption">
+      Составлена по рассказам моряков, кузнецов и лесных жителей.
+      Там, где линии расходятся с землёй, — верьте земле.
+    </p>
+  </section>
+
+  <!-- ─────────── ОГЛАВЛЕНИЕ ─────────── -->
+  <nav class="toc">
+    <h3>Содержание</h3>
+    <ol>
+      <li><a href="#prologue">От составителя</a></li>
+      <li><a href="#land">О земле Зелерьенской</a></li>
+      <li><a href="#harngard">Дом Харнгардов</a></li>
+      <li><a href="#arelian">Дом Арелианов</a></li>
+      <li><a href="#keimar">Дом Кеймаров</a></li>
+      <li><a href="#ironvein">Клан Железной Жилы</a></li>
+      <li><a href="#magic">О дарах магии</a></li>
+      <li><a href="#legends">Пять преданий</a></li>
+    </ol>
+  </nav>
+
+  <!-- ─────────── ПРОЛОГ ─────────── -->
+  <section id="prologue">
+    <h2>От составителя</h2>
+    <p class="first">Я, Келлен, сын рыбака из Порта Кеймар, провёл тридцать лет в странствиях по землям Зелерьена — от чёрных пляжей запада до туманных вершин севера. Я спал под сенью деревьев древнего леса Арельи, пил воду из подземных ключей, что бьют в земляной толще, и слушал песни русалок у рифового лабиринта. Многое из того, что я записал здесь, мне рассказали старики у очагов, жрицы у алтарей и сами государи, чьи имена ныне известны каждому ребёнку.</p>
+    <p>Пусть эта летопись послужит тем, кто придёт после меня, — чтобы помнили: Зелерьен стоит не на золоте и не на железе, а на зелёной хвое, на тихой воде и на слове, что держат между собой три народа.</p>
+    <div class="divider">✦ ❦ ✦</div>
+  </section>
+
+  <!-- ─────────── ЗЕМЛЯ ─────────── -->
+  <section id="land">
+    <h2>О земле Зелерьенской</h2>
+    <p class="first">Зелерьен — край, где земля укрыта лесом, а лес укрыт водой. Если плыть к нему с запада, первым делом увидишь чёрные пляжи: широкие, ровные, будто кто-то просеял сквозь пальцы пепел древних костров. Песок здесь зернистый и тёплый даже в пасмурный день; местные говорят, что он помнит дыхание змея, спавшего под континентом в незапамятные времена.</p>
+    <p>От побережья земля плавно поднимается к сердцу края — невысоко, но упорно, — и на этом подъёме раскинулись главные богатства Зелерьена: <strong>леса</strong>. Густые, многоярусные, они тянутся на десятки дней пути, и лишь изредка среди них мелькнёт поляна или берег озера. Реки здесь часты и быстры; они сбегают с северных хребтов, прорезают чащи и разливаются в тихие заводи, где вода стоит как зеркало.</p>
+    <p>Молодые горы стоят на севере и юго-западе — их немного, но они высоки и суровы. Между ними и морем — узкая полоса предгорий, где живут кузнецы и пастухи. А ещё ниже, в самом сердце материка, лежит впадина <strong>Реона</strong> — самая низкая точка мира, солёная и тихая, где воздух густ, а тени длинны. Там, говорят, находится дверь в подземный мир, и не всякий, кто спустился, вернулся обратно.</p>
+    <p>Воды на Зелерьене больше, чем суши. Озёра <strong>Арелья</strong> и <strong>Кейма</strong> — как два сердца континента: одно пресное и светлое, другое солёное и тёмное. Под землёй текут реки, которых никто не видел целиком; в пещерах блестят люминесцентные мхи. А у берегов, там, где в море встают рифы, вода тёплая и прозрачная, и русалки поют по ночам.</p>
+    <p>Климат здесь мягок: лето тёплое, зима не злая, дожди часты, а туманы по утрам — обычное дело. Говорят, сама земля дышит.</p>
+    <div class="divider">✦ ❦ ✦</div>
+  </section>
+
+  <!-- ─────────── ХАРНГАРДЫ ─────────── -->
+  <section id="harngard">
+    <article class="house">
+      <header class="house-header">
+        <h3>Дом Харнгардов</h3>
+        <p class="house-subtitle">Хранители Крепости Харн · Владыки Горного Севера</p>
+        <p class="motto">Крепче камня, твёрже стали</p>
+      </header>
+
+      <p>Харнгарды — древнейший из трёх людских родов Зелерьена. Их крепость вырублена в скале над северным перевалом, и из её бойниц видно, как внизу клубятся облака. Харнгарды не любят говорить о себе; они вообще не любят говорить. Кузнечное дело, воинское ремесло и верность слову — вот их закон. Дар в этом роду не редкость, но куда чаще Харнгард берётся за молот или за топор, чем за посох: иные всю жизнь остаются воинами и кузнецами, и никто в крепости не считает это ущербным. А если в ком пробуждается огонь — то огонь горячий, как сама кузня.</p>
+
+      <div class="members">
+        <div class="member-card">
+          <h4>Харальд III Каменная Рука <span class="age">68 лет</span></h4>
+          <p class="member-meta">Лорд Крепости Харн · Глава рода</p>
+          <p>Седой, огромный, с руками, покрытыми старыми ожогами. Говорит мало, слушает много, решает раз и навсегда. В юности сам ковал клинки для всего рода; теперь куёт лишь тогда, когда нужно принять важное решение — говорит, что молот помогает думать.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Сигрид Мудрая <span class="age">64 года</span></h4>
+          <p class="member-meta">Супруга лорда · Целительница</p>
+          <p>Серебряные волосы собраны в простую косу, глаза — зелёные, как мох на камне. Тихая, но её слушают все, включая мужа. Знает травы предгорий и умеет останавливать кровь словом и прикосновением.</p>
+          <span class="magic heal">Магия: Исцеление</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Торвальд Харнгард <span class="age">42 года</span></h4>
+          <p class="member-meta">Наследник · Военачальник</p>
+          <p>Тёмная борода, шрам через левую щёку, суровый взгляд. Учился войне у отца, а тактике — у наёмников с юга. Держит в голове карту каждого перевала. Мечтает вернуть роду былое влияние и не стыдится, что дара ему не досталось: топор вернее иного заклятия.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Рагнар Харнгард <span class="age">48 лет</span></h4>
+          <p class="member-meta">Второй сын лорда · Воин-чародей</p>
+          <p>Рыжий, кряжистый, с обожжённой левой рукой. В детстве сунул ладонь в горн — и горн ответил, признав в мальчике огонь. Теперь кует и бьётся, а в бою меч его горит. В крепости говорят: «Рагнар — двойная напасть: и сталь, и пламя».</p>
+          <span class="magic fire">Магия: Стихия огня</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Инга Харнгард <span class="age">35 лет</span></h4>
+          <p class="member-meta">Дочь лорда · Посланница</p>
+          <p>Рыжая, веснушчатая, живая — не похожа на сдержанных родичей. Ведёт переговоры с Тангарами и равнинниками. Умеет слушать лес и находить дорогу там, где её нет.</p>
+          <span class="magic nature">Магия: Природа</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Эльза Харнгард <span class="age">16 лет</span></h4>
+          <p class="member-meta">Внучка лорда · Ученица</p>
+          <p>Светловолосая, любопытная, с острым умом. Растёт при бабушке, учится травам и шёпоту деревьев. Говорят, её дар сильнее, чем у Инги, — но об этом в крепости молчат.</p>
+          <span class="magic nature">Магия: Природа</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Олаф Отшельник <span class="age">60 лет</span></h4>
+          <p class="member-meta">Младший брат лорда · Живёт в горах</p>
+          <p>Худой, с длинной бородой, глаза дикие. Ушёл из крепости двадцать лет назад после смерти жены. Говорят, он превращается в медведя и бродит по склонам — но кто ж поверит отшельнику?</p>
+          <span class="magic transf">Магия: Трансформагия</span>
+        </div>
+      </div>
+
+      <div class="tree-container">
+        <h4>Родословное древо</h4>
+        <div class="tree">
+          <ul>
+            <li>
+              <span class="node root">Харальд II <span class="spouse">(†)</span></span>
+              <ul>
+                <li>
+                  <span class="node lord">Харальд III <span class="spouse">⚭ Сигрид</span></span>
+                  <ul>
+                    <li>
+                      <span class="node">Торвальд</span>
+                      <ul>
+                        <li><span class="node">Эльза</span></li>
+                      </ul>
+                    </li>
+                    <li><span class="node">Рагнар</span></li>
+                    <li><span class="node">Инга</span></li>
+                  </ul>
+                </li>
+                <li><span class="node">Олаф Отшельник</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    <div class="divider">✦ ❦ ✦</div>
+  </section>
+
+
+  <!-- ─────────── АРЕЛИАНЫ ─────────── -->
+  <section id="arelian">
+    <article class="house">
+      <header class="house-header">
+        <h3>Дом Арелианов</h3>
+        <p class="house-subtitle">Владыки Тарн-Аля · Хранители озера Арелья</p>
+        <p class="motto">Свет идёт от воды</p>
+      </header>
+
+      <p>Арелианы — род древний и странный. В их жилах, говорят, течёт кровь не только людей: кто-то из предков взял в жёны дочь Высших Эльфов, и с тех пор в каждом втором поколении рождается ребёнок с серебристыми волосами. Арелианы правят Тарн-Алем — городом на берегу пресного озера, — и покровительствуют всем, кто ищет знания: звездочётам, лекарям, магам. Их библиотека считается величайшей в Зелерьене. Дар в этом роду — почти правило; но и здесь случаются дети без искры. Такие не пропадают: они становятся хранителями книг, послами, судьями — теми, кто держит город на своих плечах, пока маги смотрят в звёзды.</p>
+
+      <div class="members">
+        <div class="member-card">
+          <h4>Арел VI <span class="age">55 лет</span></h4>
+          <p class="member-meta">Лорд Тарн-Аля · Глава рода</p>
+          <p>Серебристые волосы до плеч, бледное лицо, проницательные серые глаза. Говорит тихо, но его слышно в любом зале. Покровитель искусств и магии; сам владеет Светом с юности.</p>
+          <span class="magic light">Магия: Свет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Мира Арелиан <span class="age">† 5 лет назад</span></h4>
+          <p class="member-meta">Покойная супруга лорда</p>
+          <p>Тёмноволосая, кроткая, с тихим смехом. Умела разговаривать с деревьями вокруг Арельи; её любили все. Умерла загадочно — одни говорят, болезнь, другие шепчут о тёмном колдовстве.</p>
+          <span class="magic nature">Магия: Природа</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Кассиан Арелиан <span class="age">28 лет</span></h4>
+          <p class="member-meta">Наследник · Учёный</p>
+          <p>Чёрные волосы, синие глаза, вечная книга под рукой. Изучает руины на дне Арельи. Втайне от отца зовёт астральных сущностей — и потому плохо спит по ночам.</p>
+          <span class="magic invoc">Магия: Инвокация</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Лира Арелиан <span class="age">22 года</span></h4>
+          <p class="member-meta">Дочь лорда · Друид</p>
+          <p>Золотистые волосы, звонкий голос, лёгкая походка. Больше времени проводит в лесу, чем во дворце; учится у Кеольцев. Защищает рощи вокруг Арельи от вырубки.</p>
+          <span class="magic nature">Магия: Природа</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Эрен Арелиан <span class="age">15 лет</span></h4>
+          <p class="member-meta">Младший сын · Послушник</p>
+          <p>Худой, болезненный, тихий. Готовится стать жрецом при храме Света. Наставники говорят, что в мальчике есть искра, какой не было ни в ком из рода со времён основания Тарн-Аля.</p>
+          <span class="magic holy">Магия: Святая (в обучении)</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Элиан Арелиан <span class="age">57 лет</span></h4>
+          <p class="member-meta">Старший брат лорда · Хранитель озера</p>
+          <p>Тёмные волосы с проседью, глаза цвета арельской воды. Не правит и не хочет править; живёт на западном берегу и слушает, как дышит озеро. Умеет поднимать туман, успокаивать волну и говорить с русалками без единого слова.</p>
+          <span class="magic water">Магия: Стихия воды</span>
+        </div>
+      </div>
+
+      <div class="tree-container">
+        <h4>Родословное древо</h4>
+        <div class="tree">
+          <ul>
+            <li>
+              <span class="node root">Арел V <span class="spouse">(†)</span></span>
+              <ul>
+                <li><span class="node">Элиан</span></li>
+                <li>
+                  <span class="node lord">Арел VI <span class="spouse">⚭ Мира (†)</span></span>
+                  <ul>
+                    <li><span class="node">Кассиан</span></li>
+                    <li><span class="node">Лира</span></li>
+                    <li><span class="node">Эрен</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    <div class="divider">✦ ❦ ✦</div>
+  </section>
+
+  <!-- ─────────── КЕЙМАРЫ ─────────── -->
+  <section id="keimar">
+    <article class="house">
+      <header class="house-header">
+        <h3>Дом Кеймаров</h3>
+        <p class="house-subtitle">Владыки Порта Кеймар · Хозяева Рифового Лабиринта</p>
+        <p class="motto">Тот, кто знает ветер, не боится моря</p>
+      </header>
+
+      <p>Кеймары — самый молодой из трёх людских родов, и самый дерзкий. Их возвышение началось с пиратки по имени Дагни, которая сумела договориться с русалками, получить их покровительство и короноваться в Порту Кеймар. Теперь Кеймары держат морскую торговлю всего Зелерьена; их корабли знают каждый риф, каждую отмель, каждую заводь. В их крови — соль. Дар в этом роду редок; куда больше здесь кормчих, торговцев и бойцов, которым магия ни к чему. Но когда он всё же пробуждается, то течёт как вода — тихо и неотвратимо.</p>
+
+      <div class="members">
+        <div class="member-card">
+          <h4>Дагни Кеймар <span class="age">50 лет</span></h4>
+          <p class="member-meta">Леди-адмирал · Глава рода</p>
+          <p>Рыжие волосы с проседью, зелёные глаза, шрам через левую бровь. Остра на язык, хитра, не проиграла ни одного торга. Говорит, что русалки дали ей слово, а она своё держит. Управляет портом железной рукой — но улыбается так, что никто не в обиде.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Бьорн Кеймар <span class="age">53 года</span></h4>
+          <p class="member-meta">Супруг леди · Бывший корсар</p>
+          <p>Огромный, бородатый, с руками как лопаты. Когда-то был корсаром, что грабил корабли у рифов; теперь держит порядок в порту. Молчалив, добродушен, страшно боится жены — и не стыдится этого.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Сольвейг Кеймар <span class="age">27 лет</span></h4>
+          <p class="member-meta">Старшая дочь · Капитан «Чёрной Чайки»</p>
+          <p>Рыжая, как мать, но характером — в отца: спокойная и упрямая. Водит корабли через рифовый лабиринт так, что команда не успевает испугаться. Знает наизусть все песни русалок и не боится их слушать — а они не боятся отвечать.</p>
+          <span class="magic invoc">Магия: Инвокация</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Халвар Кеймар <span class="age">24 года</span></h4>
+          <p class="member-meta">Сын · Торговый посланник</p>
+          <p>Черноволосый, смуглый, с быстрой улыбкой. Ведёт дела с Тангарами и Арелианами; говорят, умеет уговорить даже камни. Втайне мечтает о собственной флотилии.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Астрид Кеймар <span class="age">47 лет</span></h4>
+          <p class="member-meta">Сестра Дагни · Навигатор</p>
+          <p>Светлые волосы, обветренное лицо, глаза как у матери — серо-зелёные. Не любит шум и не сходит с палубы. Чувствует течение под килем и умеет разговаривать с водой: где скажет — там и пройдёт корабль, где запретит — там и риф не тронет.</p>
+          <span class="magic water">Магия: Стихия воды</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Тира Кеймар <span class="age">18 лет</span></h4>
+          <p class="member-meta">Младшая дочь · Жрица</p>
+          <p>Светлые волосы, тихий голос, задумчивый взгляд. С детства слышит шёпот духов рифов; мать отдала её в храм Света, чтобы уберечь. Но Тира больше тянется к воде, чем к алтарю.</p>
+          <span class="magic heal">Магия: Исцеление</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Старая Гуннхильд <span class="age">78 лет</span></h4>
+          <p class="member-meta">Мать Дагни и Астрид · Хранительница слова</p>
+          <p>Сгорбленная старуха с белыми как снег волосами. Уже не выходит из дома, но помнит все договоры рода наизусть. Её слово в семье — последнее.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+      </div>
+
+      <div class="tree-container">
+        <h4>Родословное древо</h4>
+        <div class="tree">
+          <ul>
+            <li>
+              <span class="node root">Гуннхильд</span>
+              <ul>
+                <li>
+                  <span class="node lord">Дагни <span class="spouse">⚭ Бьорн</span></span>
+                  <ul>
+                    <li><span class="node">Сольвейг</span></li>
+                    <li><span class="node">Халвар</span></li>
+                    <li><span class="node">Тира</span></li>
+                  </ul>
+                </li>
+                <li><span class="node">Астрид</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    <div class="divider">✦ ❦ ✦</div>
+  </section>
+
+   <!-- ─────────── КЛАН ЖЕЛЕЗНОЙ ЖИЛЫ ─────────── -->
+  <section id="ironvein">
+    <article class="house">
+      <header class="house-header">
+        <h3>Клан Железной Жилы</h3>
+        <p class="house-subtitle">Тангары Северных Гор · Мастера Адамантита и Эстиранта</p>
+        <p class="motto">Что выковано — то вечно</p>
+      </header>
+
+      <p>Тангары — не гномы, и называть их так — тяжкое оскорбление. Это подгорный народ, чьи предки пришли в северные горы ещё до людей, и чьи кузни дымят в скалах по сей день. Клан Железной Жилы — старейший из кланов: именно они нашли первые жилы адамантита и научились сплавлять эстирант так, чтобы металл помнил руку мастера. С людьми они торгуют охотно, но в свои чертоги пускают редко. Дар у тангаров пробуждается нечасто и всегда связан с камнем, огнём или руном; куда больше в клане тех, кто всю жизнь держит молот и не ищет иного. И тех, и других здесь уважают одинаково: металл не спрашивает, есть ли у кузнеца искра.</p>
+
+      <div class="members">
+        <div class="member-card">
+          <h4>Дурин Железная Жила <span class="age">140 лет</span></h4>
+          <p class="member-meta">Патриарх клана · Верховный кузнец</p>
+          <p>Борода до пояса, заплетённая в семь кос, руки — как наковальни. Говорит медленно и веско; каждое его слово записывают в клановую книгу. За сто сорок лет не выковал ни одного плохого клинка.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Брунхильда Камнеликая <span class="age">132 года</span></h4>
+          <p class="member-meta">Супруга патриарха · Рунная жрица</p>
+          <p>Седые волосы заплетены в две тугие косы; на лице — морщины, будто высеченные в граните. Вырезает руны на клинках и алтарях. Верит, что камень слышит молитвы.</p>
+          <span class="magic holy">Магия: Святая</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Торин Железная Жила <span class="age">95 лет</span></h4>
+          <p class="member-meta">Старший сын · Наследник</p>
+          <p>Рыжебородый, широкоплечий, вспыльчивый. Куёт оружие для горцев и сам же им владеет — не раз ходил с топором на орков в предгорьях. Мечтает открыть новую жилу эстиранта.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Грим Железная Жила <span class="age">108 лет</span></h4>
+          <p class="member-meta">Второй сын патриарха · Камнеход</p>
+          <p>Тёмная борода, тяжёлый взгляд, привычка подолгу стоять неподвижно. Единственный из клана, кто чувствует камень на расстоянии: где трещина под городом — он знает, где жила — тоже. Прокладывает новые штольни и не раз уводил сородичей из-под обвала.</p>
+          <span class="magic earth">Магия: Стихия земли</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Хельга Железная Жила <span class="age">88 лет</span></h4>
+          <p class="member-meta">Дочь патриарха · Мастер кристаллов</p>
+          <p>Хрупкая с виду, но пальцы у неё железные. Огранивает люминесцентные кристаллы из подземных пещер; её лампы горят в каждом доме Крепости Харн. Говорит с камнем и слышит ответ.</p>
+          <span class="magic nature">Магия: Природа (камень)</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Двалин Молотобой <span class="age">75 лет</span></h4>
+          <p class="member-meta">Младший брат патриарха · Оружейник</p>
+          <p>Лысый, с обожжёнными бровями, вечно в саже. Оружейник, каких мало: его адамантитовые топоры служат по триста лет. Неуклюж в речах, но щедр сердцем.</p>
+          <span class="magic none">Магия: не владеет</span>
+        </div>
+
+        <div class="member-card">
+          <h4>Сигурд Железная Жила <span class="age">40 лет</span></h4>
+          <p class="member-meta">Внук патриарха · Странник</p>
+          <p>Молодой тангар, ушедший из клана в поисках новых руд. Живёт в предгорьях, дружит с Ингой Харнгард. Говорят, в его кузню заглядывают даже Кеольцы.</p>
+          <span class="magic transf">Магия: Трансформагия</span>
+        </div>
+      </div>
+
+      <div class="tree-container">
+        <h4>Родословное древо</h4>
+        <div class="tree">
+          <ul>
+            <li>
+              <span class="node root">Древний клан <span class="spouse">(прародители)</span></span>
+              <ul>
+                <li>
+                  <span class="node lord">Дурин <span class="spouse">⚭ Брунхильда</span></span>
+                  <ul>
+                    <li>
+                      <span class="node">Торин</span>
+                      <ul>
+                        <li><span class="node">Сигурд</span></li>
+                      </ul>
+                    </li>
+                    <li><span class="node">Грим</span></li>
+                    <li><span class="node">Хельга</span></li>
+                  </ul>
+                </li>
+                <li><span class="node">Двалин</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    <div class="divider">✦ ❦ ✦</div>
+  </section>
+
+  <!-- ─────────── МАГИЯ ─────────── -->
+  <section id="magic">
+    <h2>О дарах магии</h2>
+
+    <p class="magic-intro">
+      Магия на Зелерьене не редкость, но и не обыденность. Даётся она не каждому,
+      и не всегда по наследству. Иные рождаются с даром, иные учатся годами,
+      а иные живут и умирают без единой искры — и мир от этого не беднеет.
+    </p>
+
+    <!-- ЭНЕРГО-МАГИЯ -->
+    <div class="magic-tier">
+      <h3>Основа основ</h3>
+      <p class="tier-sub">То, без чего не бывает ни стихий, ни сакральных течений.</p>
+
+      <div class="magic-grid">
+        <div class="magic-card">
+          <div class="magic-icon">✧</div>
+          <h4>Энерго-магия</h4>
+          <p>Основа основ каждого мага, что развивается в сакральных течениях, — мана-тело, его резерв и ритм. И отдельная ветка, и ключ к повышенным уровням прочих магий. Сильный маг, не познавший её, останется ремесленником.</p>
+          <span class="magic-example">— Келлен Странник, «Заметки о манателе»</span>
+        </div>
+
+        <div class="magic-card">
+          <div class="magic-icon">⚡</div>
+          <h4>Стихии — общее правило</h4>
+          <p>Рождённый стихийным постигает одну стихию глубоко; прочие — до уровня Специалист. Огонь не совместим с водой и холодом; воздух — с землёй. Противопоказания — не запрет, а предел, за которым дар ломается.</p>
+          <span class="magic-example">— из наставлений Тарн-Альской школы</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- СТИХИИ -->
+    <div class="magic-tier">
+      <h3>Магия первоэлементов</h3>
+      <p class="tier-sub">Древняя, почитаемая, отождествляемая с божеской сутью. Пробуждалась сама — и по сей день не всякий знает, откуда в нём огонь.</p>
+
+      <div class="elements-grid">
+        <div class="element-card">
+          <div class="element-icon">💨</div>
+          <h5>Воздух</h5>
+          <p>Первый вдох. Лёгок, быстр, многомерен; труднее всего удержать в узде.</p>
+        </div>
+        <div class="element-card">
+          <div class="element-icon">💧</div>
+          <h5>Вода</h5>
+          <p>Податлива, плавна, спокойна. Первая пища. Прощает ошибки — но не прощает страха.</p>
+        </div>
+        <div class="element-card">
+          <div class="element-icon">🔥</div>
+          <h5>Огонь</h5>
+          <p>Сухой, резкий, агрессивный; поступает рывками. Ярость и гнев. Не терпит воды и холода.</p>
+        </div>
+        <div class="element-card">
+          <div class="element-icon">⛰</div>
+          <h5>Земля</h5>
+          <p>Твёрда, медлительна, груба, упёрта. Ступня на почве. Не уживается с воздухом.</p>
+        </div>
+        <div class="element-card">
+          <div class="element-icon">🌩</div>
+          <h5>Молния</h5>
+          <p>Труднее огня; требует точности и терпения. Гнев неба, но в руке — расчёт.</p>
+        </div>
+        <div class="element-card">
+          <div class="element-icon">❄</div>
+          <h5>Холод</h5>
+          <p>Тих, как снег. Опасен для огня; опасен и для того, кто не умеет с ним молчать.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- САКРАЛЬНЫЕ ТЕЧЕНИЯ -->
+    <div class="magic-tier">
+      <h3>Сакральные течения</h3>
+      <p class="tier-sub">Дары, что даются не за заслуги, а по призванию. Их труднее всего утаить — и труднее всего нести.</p>
+
+      <div class="magic-grid">
+        <div class="magic-card">
+          <div class="magic-icon">🌿</div>
+          <h4>Магия Природы</h4>
+          <p>Слышали шёпот деревьев и ток воды под землёй; трава росла под ладонью, а зверь не боялся их шага. Лес отвечал им — но требовал ответа.</p>
+          <span class="magic-example">— Кеольцы; Инга и Эльза Харнгард, Лира Арелиан</span>
+        </div>
+
+        <div class="magic-card">
+          <div class="magic-icon">🌈</div>
+          <h4>Магия Света</h4>
+          <p>Манипулировали цветом и раскрывали суть; свет обличал, а не жёг. Видели ложь, зависть и глухую обиду — и потому казались слегка не от мира сего.</p>
+          <span class="magic-example">— Арел VI из Тарн-Аля</span>
+        </div>
+
+        <div class="magic-card">
+          <div class="magic-icon">✨</div>
+          <h4>Святая магия</h4>
+          <p>Управляли светлой энергетикой цвета расплавленного серебра — против нечисти, нежити и тёмных сущностей. Экзорцизм и защита души. Свет, что вредит лишь злому.</p>
+          <span class="magic-example">— Брунхильда Камнеликая; юный Эрен Арелиан</span>
+        </div>
+
+        <div class="magic-card">
+          <div class="magic-icon">✚</div>
+          <h4>Магия Исцеления</h4>
+          <p>Воздействовали на живую материю, ускоряя восстановление; но без знания анатомии и точного диагноза дар бесполезен. Целитель — прежде всего лекарь.</p>
+          <span class="magic-example">— Сигрид Мудрая; Тира Кеймар</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- РЕДКИЕ И ОПАСНЫЕ -->
+    <div class="magic-tier">
+      <h3>Редкие и опасные</h3>
+      <p class="tier-sub">Дары, за которые в иных городах сжигают, а в иных — кланяются в пояс.</p>
+
+      <div class="magic-grid">
+        <div class="magic-card">
+          <div class="magic-icon">🐾</div>
+          <h4>Трансформагия</h4>
+          <p>Силой воли они меняли свои тела, придавая им суть животных, полностью или частично, меняя не только облик, но и характер. Иные — изменяли лица, утрачивая черты прежних личин, дабы обхитрить незнающих.</p>
+          <span class="magic-example">— Олаф Отшельник; Сигурд Железная Жила</span>
+        </div>
+
+        <div class="magic-card">
+          <div class="magic-icon">🌌</div>
+          <h4>Инвокация</h4>
+          <p>Взмахом рук и словом звали зверей мистического астрала, одаривая их силой, целью и телом полуматериальным — чтобы исполнили нужду призывающего.</p>
+          <span class="magic-example">— Кассиан Арелиан (тайно); Сольвейг Кеймар (морские духи)</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="magic-note">
+      <strong>Не всякий в роду — маг.</strong> У Харнгардов воины и кузнецы не уступают магам; у Арелианов библиотекари и звездочёты иные всю жизнь не касаются дара; у Кеймаров кормчие и торговцы обходятся без чар. Магия — не наследство, а случай и труд. И потому в каждом роду есть те, кто владеет стихией, и те, кто владеет топором.
+    </p>
+
+    <div class="divider">✦ ❦ ✦</div>
+  </section>
+
+  <!-- ─────────── ЛЕГЕНДЫ ─────────── -->
+<section id="legends">
+  <h2>Пять преданий</h2>
+
+  <div class="legends-shell">
+    <p class="legends-intro">
+      Здесь собраны пять историй, что я слышал у очагов, на палубах и в храмовых дворах.
+      Я записал их так, как мне их рассказали, — не поправляя и не сглаживая.
+      Пусть читатель сам решит, где в них быль, а где вымысел.
+    </p>
+
+    <article class="legend-verse">
+      <div class="legend-numeral">I</div>
+      <h4>Легенда о Чёрном Песке</h4>
+      <p class="epigraph">«Что сгорело — то осталось; что осталось — то помнит».</p>
+
+      <p>Когда Мерион был ещё молод, а море пусто от кораблей, под землями Зелерьена спал змей <strong>Огнис</strong>. Не дракон небесный, что дышит огнём в облака, — а змей земляной, чьё тело было длиной от северных гор до южных рифов. Чешуя его — обсидиан, чёрный и гладкий; дыхание — расплавленный камень; сон — тяжелее самих гор. Он спал тысячу тысяч лет, и никто не тревожил его, потому что никто не знал, что он есть.</p>
+
+      <p>Говорят, будто видели его однажды пастухи, что гнали скот через предгорья. Земля дрогнула, треснула, и в трещине блеснуло что-то чёрное. Старики сказали: «Это Огнис ворочается». Молодые посмеялись. А наутро в предгорьях забил горячий источник, и вода в нём была солёная — будто змей плакал во сне.</p>
+
+      <p>Но пришли из глубин морские чудовища — Левиафарны, Девятирогие, те, что глотают корабли и топят луну, — и поднялись они к берегам, чтобы проглотить землю. Тогда Огнис проснулся.</p>
+
+      <span class="scene-break">✦ ✦ ✦</span>
+
+      <p>Он не заревел. Он <em>спел</em>. Песня его была песней огня — низкой, долгой, как гул подземной реки. Море вскипело, и чудовища обратились в пепел; и пепел тот был так горяч, что плавил скалы. Но и сам Огнис отдал себя без остатка — тело его рассыпалось, кости стали подземными жилами, а пепел лёг на берега. Так появились чёрные пляжи.</p>
+
+      <p>Говорят, если приложить ухо к песку на закате, можно услышать его песню — тихую, как шёпот. Она не страшная. Она просто очень старая.</p>
+
+      <span class="chant">
+        Спи, Огнис, спи —<br>
+        море у твоих лап.<br>
+        Чешуя твоя — берег,<br>
+        дыхание — пар.<br>
+        Кто считает камешки —<br>
+        тот считает года.<br>
+        А кто взял лишний камень —<br>
+        тот разбудит тебя.
+      </span>
+
+      <span class="warning">Собирать с пляжа можно не более семи чёрных камешков — иначе Огнис решит, что ты крадёшь его чешую, и снова проснётся. Семь камешков на шнуре — ожерелье удачи; восемь — беда. Семь камешков, снятых в одну ночь, — верная смерть.</span>
+
+      <span class="attribution">Записано от старого рыбака Аслака, что живёт на мысу у Порта Кеймар</span>
+    </article>
+
+    <article class="legend-verse">
+      <div class="legend-numeral">II</div>
+      <h4>Миф о Двух Озёрах</h4>
+      <p class="epigraph">«Одна смеялась — и мир стал зелёным; другая плакала — и мир стал глубоким».</p>
+
+      <p>В начале времён было две сестры, дочери первого дождя. Старшую звали <strong>Арелья</strong>, младшую — <strong>Кейма</strong>. Арелья смеялась, и там, где падал её смех, вырастали травы, поднимались деревья и текли реки. Кейма плакала, и там, где падали её слёзы, земля проседала, образуя впадины, а вода становилась солёной.</p>
+
+      <p>Они любили друг друга больше всего на свете — но были слишком разными. Арелья тянулась к свету: любила утро, цветы, песни птиц. Кейма тянулась к глубине: любила сумерки, тишину, шёпот камня под водой. Когда мир был закончен, Арелья выбрала свет — и осталась на поверхности, в озере, что носит её имя. Кейма выбрала глубину — и ушла под землю, в солёное озеро, что носит её имя.</p>
+
+      <span class="scene-break">✦ ✦ ✦</span>
+
+      <p>Но раз в год, в самую длинную ночь, сёстры встречаются в подземных озёрах, что лежат в земляной толще, и обмениваются водами. Оттого вода в подземных ключах то пресна, то солона. А тот, кто пьёт из подземного ключа в самую длинную ночь, слышит — если очень повезёт — их смех и их плач, переплетённые вместе.</p>
+
+      <p>Рассказывают о юноше Лиане и девушке Тове, что выпили в один день из обоих озёр. Лиан увидел долгую и счастливую жизнь; Това — короткую. Они всё равно поженились, и Това умерла в тридцать лет — но у них было двадцать лет радости, каких не знали иные за сто. Когда её хоронили, над озером Арелья шёл дождь, а над Кеймой — нет. Старики сказали: «Арелья плачет. Кейма молчит. Так сёстры прощаются».</p>
+
+      <p>С тех пор на свадьбах пьют из двух чаш — но не в один день, чтобы не увидеть всю судьбу сразу. А если кто-то всё же выпьет в один — говорят, ему не стоит спать этой ночью: во сне он увидит то, чего не должен.</p>
+
+      <span class="warning">Не спрашивай у воды, что будет. Спроси лучше, что было, — на это она отвечает охотнее.</span>
+
+      <span class="attribution">Записано от жрицы Милы из храма на берегу Арельи</span>
+    </article>
+
+    <article class="legend-verse">
+      <div class="legend-numeral">III</div>
+      <h4>Сказание о Реоне — Глубине Мира</h4>
+      <p class="epigraph">«Спрашивай — и я отвечу. Но у всякого ответа есть цена».</p>
+
+      <p>Триста лет назад жил в Тарн-Але учёный муж по имени <strong>Верен</strong> — тихий, близорукий, с руками, всегда испачканными чернилами. Он знал семь языков и ни одного друга. Говорили, будто он задался вопросом, на который не было ответа в книгах: что лежит за смертью. И решил спросить у того, кто, по слухам, знает.</p>
+
+      <p>Он собрал двенадцать спутников — не воинов, а таких же книжников, как сам. Девять повернули назад у первой солёной равнины: там воздух так сух, что трескаются губы, а соль скрипит на зубах. Двое умерли от жажды, хотя вокруг была вода — солёная, как слёзы. Верен и последний его товарищ, кузнец по имени Гарм, шли дальше.</p>
+
+      <span class="scene-break">✦ ✦ ✦</span>
+
+      <p>Они нашли озеро, чёрное как чернила, и в нём — дверь. Не из камня и не из дерева, а из соляных кристаллов, растущих прямо из воды. На двери было начертано нечто на языке, которого Верен не знал, — но понял:</p>
+
+      <span class="dialogue"><strong>«Спроси — и я отвечу. Но у всякого ответа есть цена».</strong></span>
+
+      <p>Гарм сказал: «Не стучи. Пойдём назад». Верен сказал: «Я шёл триста дней». И постучал.</p>
+
+      <p>Дверь открылась — не вовнутрь и не наружу, а как-то иначе, будто сам воздух раздвинулся. Верен вошёл. Гарм ждал снаружи девять дней — без воды, без сна. На десятый день Верен вышел. Он был седой — весь, до последнего волоса, — и улыбался. Он не сказал ни слова. Они пошли назад, и Гарм до самой смерти не мог забыть этой улыбки: «Так улыбаются не те, кто узнал истину, а те, кто узнал, что истины нет».</p>
+
+      <p>Верен написал три книги. Первая — о Реоне: о дороге, о соли, о двери. Вторая — о том, что он видел во сне после. Третья — написана шифром, и не разгадал его никто. Он исчез через год. Говорят, вернулся в Реону и больше не вышел.</p>
+
+      <span class="warning">Хранитель Глубин не зол и не страшен. Он просто очень стар — и очень долго один. Он не хочет тебя убить; он хочет, чтобы ты остался. Вот в чём настоящая опасность.</span>
+
+      <span class="attribution">Записано от архивариуса Тарн-Аля, что хранит книги Верена и не даёт их читать никому</span>
+    </article>
+
+    <article class="legend-verse">
+      <div class="legend-numeral">IV</div>
+      <h4>Легенда о Рифовом Лабиринте</h4>
+      <p class="epigraph">«Тот, кто отдал имя, — не боится отдать жизнь».</p>
+
+      <p>Кракен <strong>Кей-Мор</strong> не был рождён в этом мире. Он упал со звёзд в море, и море не смогло его удержать. Он поднялся, и щупальца его достали до неба; он глотал корабли целиком и срывал луну с неба ради забавы. Рыбаки говорили: «Не выходи в море, когда вода слишком тиха, — это Кей-Мор притаился».</p>
+
+      <p>Никто не мог к нему подступиться — кроме <strong>Тарна</strong>, сына рыбака, что однажды ребёнком побывал в брюхе кракена и вышел оттуда живым. Говорят, он провёл там три дня и три ночи; когда его выплюнуло на берег, он не плакал и не смеялся, а сел и стал смотреть на море. С тех пор он знал, где спит Кей-Мор, и знал, что у кракена есть глаз, которого он не закрывает.</p>
+
+      <span class="scene-break">✦ ✦ ✦</span>
+
+      <p>Тарн пошёл к морским духам — тем, что живут в рифах и поют в заводях. Он сказал им: «Дайте мне копьё, чтобы убить кракена». Духи ответили: «Отдай нам своё имя». Он отдал. С тех пор «Тарн» значит «безымянный» на древнем наречии — но мало кто помнит об этом. Рыбаки зовут его просто «Тот, Кто Вернулся».</p>
+
+      <p>Он ударил кракена в глаз — единственный, что не закрывался, — и зверь обратился в камень. Щупальца его стали рифами; глаз его — единственной чёрной жемчужиной — лежит в самом сердце лабиринта.</p>
+
+      <span class="chant">
+        Камень — не мёртвый.<br>
+        Камень — спящий.<br>
+        Тот, кто возьмёт жемчужину,<br>
+        услышит, как он дышит.
+      </span>
+
+      <p>Жемчужина исполняет желание — но морские духи берут свою цену: тот, кто возьмёт жемчужину, должен вернуть взамен жизнь. Не свою — можно чужую. Оттого у рифов так много вдов и так мало стариков. Говорят, Дагни Кеймар знает дорогу к сердцу лабиринта, но не говорит никому — даже дочерям. А Сольвейг, её старшая, однажды сказала мне: «Мать не потому молчит, что не хочет. Мать молчит, потому что уже заплатила».</p>
+
+      <span class="warning">Если увидишь чёрную жемчужину — отвернись. Она не блестит; она смотрит.</span>
+
+      <span class="attribution">Записано от Сольвейг Кеймар, которая, по слухам, видела эту жемчужину</span>
+    </article>
+
+    <article class="legend-verse">
+      <div class="legend-numeral">V</div>
+      <h4>Миф об Эстиранте — Слезе Звёзд</h4>
+      <p class="epigraph">«Металл помнит руку. А рука — помнит металл».</p>
+
+      <p>Когда звёзды впервые взглянули на Мерион, они увидели, что мир тёмен и холоден. И заплакали. Слёзы их падали сквозь пустоту миллионы лет и застывали в металл — голубой, светлый, гудящий памятью. Так родился <strong>эстирант</strong>. Он не встречается большими жилами; его находят по одной-две крупицы в древних породах, и тангары говорят, что каждая крупица — одна звезда, что плакала.</p>
+
+      <p>Тангары верят: клинок из эстиранта помнит руку, что его выковала. Если мастер умрёт, клинок откажется служить другому — он сломается, но не предаст. Потому тангары не продают лучшие клинки; они дарят их лишь тем, кому доверяют жизнь. А если клинок из эстиранта сам выбрал хозяина — значит, мастер вложил в него часть души. Такое оружие не продаётся ни за какое золото.</p>
+
+      <span class="scene-break">✦ ✦ ✦</span>
+
+      <p>А <strong>адамантит</strong> — это кости великана <strong>Гронна</strong>, что держал небо, пока боги строили горы. Он был силён, но не бессмертен. Когда горы были готовы, ему сказали: «Отдохни». Он лёг — и не встал. Тело его стало северным хребтом, а кости — чистейшим адамантитом, твёрже любого металла.</p>
+
+      <p>Меч из адамантита режет камень; но тангары верят, что он никогда не ранит родича своего владельца — не потому что не может, а потому что помнит Гронна, любившего своих детей. Когда тангар берёт в руки адамантитовый молот, он сначала говорит: «Прости, дедушка Гронн». Это не молитва. Это вежливость.</p>
+
+      <span class="chant">
+        Звезда плакала — стал свет.<br>
+        Великан лёг — стала сталь.<br>
+        Кузнец ударил — стала память.<br>
+        Воин поднял — стала судьба.
+      </span>
+
+      <p class="aside">Мне говорили, будто в глубоких кузнях Крепости Харн есть клинок, выкованный ещё до прихода людей, — и он до сих пор помнит руку первого мастера. Я не видел его. Но когда я спросил Дурина, он долго молчал, а потом сказал: «Есть вещи, о которых не говорят вслух. Не потому что боятся. Потому что недостойны».</p>
+
+      <span class="attribution">Записано от патриарха Дурина Железной Жилы в Крепости Харн</span>
+    </article>
+  </div>
+
+  <div class="divider">✦ ❦ ✦</div>
+</section>
+
+  <!-- ─────────── ПОДВАЛ ─────────── -->
+  <footer>
+    <span class="ornament">✦ ❦ ✦</span>
+    Здесь заканчивается летопись, собранная Келленом Странником<br>
+    в год 218-й от Пакта Трёх, в городе Тарн-Аль,<br>
+    что стоит на берегу светлого озера Арелья.<br><br>
+    <em>Пусть зелёные земли Зелерьена стоят вечно,<br>
+    а вода и лес хранят своих детей.</em>
+  </footer>
+
+</div>
+</body>
+</html>

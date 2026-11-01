@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>География Мериона</title>
+<style>
+  :root{
+    --bg:#0e1117; --panel:#161b26; --panel-2:#1d2433;
+    --accent:#d4a857; --accent-soft:#8a6d34;
+    --text:#e8e4d9; --muted:#9aa3b2; --line:#2a3346;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Georgia","Times New Roman",serif; color:var(--text);
+    background:
+      radial-gradient(circle at 15% 0%, #1b2233 0%, transparent 55%),
+      radial-gradient(circle at 85% 100%, #221c14 0%, transparent 50%),
+      var(--bg);
+    line-height:1.65;
+  }
+  header.hero{
+    text-align:center; padding:70px 20px 45px; border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(212,168,87,.08), transparent);
+  }
+  header.hero h1{
+    margin:0 0 10px; font-size:clamp(2rem,5vw,3.2rem);
+    letter-spacing:.06em; color:var(--accent);
+    text-shadow:0 0 24px rgba(212,168,87,.25);
+  }
+  header.hero p{margin:0; color:var(--muted); font-style:italic;}
+
+  .wrap{max-width:1100px; margin:0 auto; padding:50px 20px 90px;}
+
+  .grid{
+    display:grid; gap:20px;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+  }
+  .card{
+    display:block; text-decoration:none; color:inherit;
+    background:var(--panel); border:1px solid var(--line);
+    border-left:4px solid var(--accent-soft); border-radius:14px;
+    padding:22px 24px; transition:border-color .25s, transform .25s, background .25s;
+  }
+  .card:hover, .card:focus{
+    border-left-color:var(--accent); background:var(--panel-2);
+    transform:translateY(-3px); outline:none;
+  }
+  .card h2{margin:0 0 4px; font-size:1.25rem; color:var(--accent);}
+  .card .type{
+    display:block; font-family:system-ui,sans-serif; font-size:.66rem;
+    text-transform:uppercase; letter-spacing:.16em; color:var(--muted);
+    margin-bottom:10px;
+  }
+  .card p{margin:0; font-size:.92rem; color:#cfd3db;}
+
+  footer{
+    text-align:center; padding:30px 20px 50px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:.85rem; font-style:italic;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>География Мериона</h1>
+  <p>Атлас земель, вод и запредельных сфер</p>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <a class="card" href="goedros.html">
+      <h2>Гоэдрос</h2>
+      <span class="type">Горный край</span>
+      <p>Суровые хребты, вечный иней и глубокие ущелья.</p>
+    </a>
+
+    <a class="card" href="zelerien.html">
+      <h2>Зелерьен</h2>
+      <span class="type">Лесное княжество</span>
+      <p>Серебристые леса, живущие по законам времён года.</p>
+    </a>
+
+    <a class="card" href="elhar.html">
+      <h2>Эльхар</h2>
+      <span class="type">Плато</span>
+      <p>Высокое плато астрономов и каменных мостов.</p>
+    </a>
+
+    <a class="card" href="min-akore.html">
+      <h2>Мин Акоре</h2>
+      <span class="type">Долина</span>
+      <p>Тёплая житница Мериона и перекрёсток торговых путей.</p>
+    </a>
+
+    <a class="card" href="nerbyer.html">
+      <h2>Нэрбъер</h2>
+      <span class="type">Северные фьорды</span>
+      <p>Ледяные заливы, скалистые берега и огни глубин.</p>
+    </a>
+
+    <a class="card" href="ankaria.html">
+      <h2>Анкария</h2>
+      <span class="type">Степь</span>
+      <p>Бескрайние просторы вольных кочевых родов.</p>
+    </a>
+
+    <a class="card" href="miahos.html">
+      <h2>Миахос</h2>
+      <span class="type">Пустошь</span>
+      <p>Земля трещин, тёмных ветров и следов древних битв.</p>
+    </a>
+
+    <a class="card" href="andora.html">
+      <h2>Андора</h2>
+      <span class="type">Приморский союз</span>
+      <p>Города маяков и верфей, совет капитанов.</p>
+    </a>
+
+    <a class="card" href="poedrum.html">
+      <h2>Поэдрум</h2>
+      <span class="type">Островной архипелаг</span>
+      <p>Вулканические острова, лагуны и подводные дворцы.</p>
+    </a>
+
+    <a class="card" href="vareyman.html">
+      <h2>Варейман</h2>
+      <span class="type">Пограничная марка</span>
+      <p>Крепости, дозорные башни и крепкое слово.</p>
+    </a>
+
+    <a class="card" href="water.html">
+      <h2>Водное пространство</h2>
+      <span class="type">Моря, реки и океан</span>
+      <p>Все водные пути Мериона и маршруты за горизонт.</p>
+    </a>
+
+    <a class="card" href="astral.html">
+      <h2>Миры Астрала</h2>
+      <span class="type">Запредельные сферы</span>
+      <p>Плавучие острова и реальности за краем карты.</p>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <p>Составлено картографами Мериона · Земли, воды и сферы</p>
+</footer>
+
+</body>
+</html>

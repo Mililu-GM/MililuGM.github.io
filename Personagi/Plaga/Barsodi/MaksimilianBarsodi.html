@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Файл Максимилиан Барсоди</title>
+<style>
+    /* ============ ПЕРЕМЕННЫЕ ============ */
+    :root{
+        --wine-deep:#1a0205;
+        --wine:#4a0a12;
+        --wine-light:#7d1420;
+        --gold:#e8b873;
+        --gold-bright:#ffd89b;
+        --ember:#ff6a00;
+        --text:#f3d9b1;
+        --text-dim:#e2c39c;
+    }
+
+    *{box-sizing:border-box;}
+
+    html{scroll-behavior:smooth;}
+
+    body{
+        margin:0;
+        min-height:100vh;
+        background:#080100;
+        color:var(--text);
+        font-family:"Georgia","Times New Roman",serif;
+        overflow-x:hidden;
+        position:relative;
+        padding:0 12px;
+    }
+
+    /* ============ ФОН: ПЫЛАЮЩИЙ АД ============ */
+    .hell{
+        position:fixed;
+        inset:0;
+        z-index:0;
+        background:
+            radial-gradient(ellipse 120% 90% at 50% 125%,
+                #ffb000 0%,
+                #ff5a00 14%,
+                #c81f00 32%,
+                #6b0a00 52%,
+                #260300 74%,
+                #050000 100%);
+        overflow:hidden;
+    }
+
+    /* Клубы адского пламени */
+    .hell::before,
+    .hell::after{
+        content:"";
+        position:absolute;
+        inset:-25%;
+        filter:blur(60px);
+        opacity:.85;
+    }
+
+    .hell::before{
+        background:
+            radial-gradient(circle at 18% 95%, rgba(255,170,0,.75), transparent 42%),
+            radial-gradient(circle at 52% 105%, rgba(255,70,0,.80), transparent 48%),
+            radial-gradient(circle at 82% 92%, rgba(255,140,0,.70), transparent 45%);
+        animation:flicker 6s ease-in-out infinite alternate;
+    }
+
+    .hell::after{
+        background:
+            radial-gradient(circle at 35% 80%, rgba(255,90,0,.45), transparent 38%),
+            radial-gradient(circle at 70% 75%, rgba(200,20,0,.50), transparent 42%),
+            radial-gradient(circle at 50% 60%, rgba(120,0,0,.35), transparent 60%);
+        animation:flicker 9s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes flicker{
+        0%   {opacity:.65; transform:scale(1)    translateY(0);}
+        40%  {opacity:.95; transform:scale(1.04) translateY(-1%);}
+        100% {opacity:.75; transform:scale(1.01) translateY(0.5%);}
+    }
+
+    /* Искры / угольки */
+    .embers{
+        position:fixed;
+        inset:0;
+        z-index:0;
+        pointer-events:none;
+        overflow:hidden;
+    }
+    .embers i{
+        position:absolute;
+        bottom:-12px;
+        width:3px;
+        height:3px;
+        border-radius:50%;
+        background:#ffc46b;
+        box-shadow:0 0 10px 3px rgba(255,110,0,.85);
+        animation-name:rise;
+        animation-timing-function:linear;
+        animation-iteration-count:infinite;
+        opacity:0;
+    }
+    @keyframes rise{
+        0%   {transform:translate3d(0,0,0) scale(1);   opacity:0;}
+        12%  {opacity:.95;}
+        70%  {opacity:.55;}
+        100% {transform:translate3d(40px,-108vh,0) scale(.25); opacity:0;}
+    }
+
+    /* ============ СВИТОК ============ */
+    .scroll{
+        position:relative;
+        z-index:1;
+        max-width:920px;
+        margin:44px auto 80px;
+        padding:56px 48px 70px;
+        border-radius:8px;
+        border:2px solid rgba(232,184,115,.55);
+        background:
+            linear-gradient(180deg,
+                rgba(74,10,18,.96) 0%,
+                rgba(52,6,11,.97) 45%,
+                rgba(30,3,6,.98) 100%);
+        box-shadow:
+            0 0 0 6px rgba(14,1,3,.92),
+            0 0 0 8px rgba(232,184,115,.18),
+            0 0 90px rgba(255,90,0,.30),
+            0 0 200px rgba(255,40,0,.18),
+            inset 0 0 120px rgba(0,0,0,.85);
+        backdrop-filter:blur(1px);
+    }
+
+    /* Золотые уголки свитка */
+    .scroll::before,
+    .scroll::after{
+        content:"";
+        position:absolute;
+        width:54px;
+        height:54px;
+        border:2px solid rgba(232,184,115,.65);
+        pointer-events:none;
+    }
+    .scroll::before{
+        top:14px; left:14px;
+        border-right:none;
+        border-bottom:none;
+    }
+    .scroll::after{
+        bottom:14px; right:14px;
+        border-left:none;
+        border-top:none;
+    }
+
+    /* ============ ЗАГОЛОВОК ============ */
+    .over-title{
+        margin:0 0 6px;
+        text-align:center;
+        font-size:.72rem;
+        letter-spacing:.55em;
+        text-transform:uppercase;
+        color:rgba(232,184,115,.65);
+    }
+
+    h1{
+        margin:0;
+        text-align:center;
+        font-size:clamp(1.7rem, 5.4vw, 3.3rem);
+        line-height:1.15;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        background:linear-gradient(180deg,
+            #fff6dd 0%,
+            #ffd89b 34%,
+            #e8a13f 62%,
+            #a85f12 85%,
+            #7c3f06 100%);
+        -webkit-background-clip:text;
+        background-clip:text;
+        color:transparent;
+        filter:drop-shadow(0 0 16px rgba(255,130,0,.55))
+               drop-shadow(0 0 40px rgba(255,60,0,.30));
+        animation:titleGlow 5s ease-in-out infinite alternate;
+    }
+    @keyframes titleGlow{
+        0%  {filter:drop-shadow(0 0 12px rgba(255,130,0,.45)) drop-shadow(0 0 30px rgba(255,60,0,.22));}
+        100%{filter:drop-shadow(0 0 22px rgba(255,160,20,.70)) drop-shadow(0 0 55px rgba(255,70,0,.40));}
+    }
+
+    .ornament{
+        text-align:center;
+        margin:14px 0 4px;
+        color:rgba(232,184,115,.75);
+        font-size:1rem;
+        letter-spacing:.7em;
+        text-shadow:0 0 12px rgba(255,120,0,.6);
+    }
+
+    /* ============ ПОРТРЕТ / ССЫЛКА НА ИЗОБРАЖЕНИЕ ============ */
+    .portrait{
+        display:flex;
+        justify-content:center;
+        margin:30px 0 10px;
+    }
+    .portrait a{
+        display:block;
+        padding:7px;
+        border-radius:6px;
+        border:1px solid rgba(232,184,115,.55);
+        background:rgba(0,0,0,.45);
+        box-shadow:
+            0 0 22px rgba(255,90,0,.35),
+            inset 0 0 22px rgba(0,0,0,.8);
+        transition:box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+    }
+    .portrait a:hover{
+        transform:translateY(-3px);
+        border-color:rgba(255,190,90,.95);
+        box-shadow:0 0 40px rgba(255,120,0,.70), inset 0 0 22px rgba(0,0,0,.8);
+    }
+    .portrait img{
+        display:block;
+        width:100%;
+        max-width:300px;
+        height:auto;
+        border-radius:3px;
+        filter:sepia(.18) saturate(1.12) contrast(1.05);
+    }
+    .portrait-caption{
+        text-align:center;
+        font-size:.75rem;
+        letter-spacing:.28em;
+        text-transform:uppercase;
+        color:rgba(232,184,115,.55);
+        margin:12px 0 0;
+    }
+
+    /* ============ ПАРАМЕТРЫ ТЕЛА ============ */
+    .params{
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+        gap:12px 32px;
+        margin:40px 0 10px;
+        padding:24px 26px;
+        border:1px solid rgba(232,184,115,.35);
+        border-radius:5px;
+        background:
+            linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,.16));
+        box-shadow:inset 0 0 40px rgba(0,0,0,.65);
+    }
+    .param{
+        display:flex;
+        align-items:baseline;
+        justify-content:space-between;
+        gap:14px;
+        padding-bottom:6px;
+        border-bottom:1px dashed rgba(232,184,115,.22);
+    }
+    .param dt{
+        margin:0;
+        font-size:.74rem;
+        letter-spacing:.14em;
+        text-transform:uppercase;
+        color:rgba(232,184,115,.80);
+        white-space:nowrap;
+    }
+    .param dd{
+        margin:0;
+        font-size:1rem;
+        color:#ffe9c9;
+        text-align:right;
+    }
+    .param dd.empty{color:rgba(255,233,201,.35);}
+
+    /* ============ ЗАГОЛОВКИ СЕКЦИЙ ============ */
+    .section-title{
+        display:flex;
+        align-items:center;
+        gap:18px;
+        margin:58px 0 26px;
+        font-size:clamp(1.05rem, 2.6vw, 1.42rem);
+        letter-spacing:.18em;
+        text-transform:uppercase;
+        color:#ffcf8f;
+        text-shadow:0 0 18px rgba(255,90,0,.65);
+    }
+    .section-title::before,
+    .section-title::after{
+        content:"";
+        flex:1;
+        height:1px;
+        background:linear-gradient(90deg,
+            transparent,
+            rgba(232,184,115,.75),
+            transparent);
+    }
+    .section-title span{white-space:nowrap;}
+
+    /* ============ КАРТОЧКИ СПОСОБНОСТЕЙ ============ */
+    .ability{
+        position:relative;
+        margin:16px 0;
+        padding:18px 22px 18px 66px;
+        border-radius:5px;
+        border-left:3px solid #b8341f;
+        background:
+            linear-gradient(135deg,
+                rgba(104,18,29,.55) 0%,
+                rgba(46,6,11,.60) 100%);
+        box-shadow:
+            inset 0 0 34px rgba(0,0,0,.55),
+            0 0 0 1px rgba(232,184,115,.12);
+        transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .ability:hover{
+        transform:translateX(5px);
+        border-left-color:#ffb347;
+        box-shadow:
+            inset 0 0 34px rgba(0,0,0,.55),
+            0 0 28px rgba(255,90,0,.35),
+            0 0 0 1px rgba(232,184,115,.30);
+    }
+
+    .ability .num{
+        position:absolute;
+        left:16px;
+        top:16px;
+        width:34px;
+        height:34px;
+        display:grid;
+        place-items:center;
+        border-radius:50%;
+        font-size:.95rem;
+        font-weight:bold;
+        color:#2a0508;
+        background:radial-gradient(circle at 32% 26%,
+            #fff0c6 0%,
+            #e8a13f 52%,
+            #9c5a12 100%);
+        box-shadow:
+            0 0 16px rgba(255,160,40,.65),
+            inset 0 -2px 4px rgba(0,0,0,.35);
+    }
+
+    .ability h3{
+        margin:0 0 9px;
+        font-size:1.08rem;
+        line-height:1.35;
+        letter-spacing:.02em;
+        color:#ffd9a2;
+        text-shadow:0 0 12px rgba(255,110,0,.35);
+    }
+    .ability h3 .note{
+        display:inline;
+        font-size:.86rem;
+        font-weight:normal;
+        font-style:italic;
+        color:#ff9b6a;
+        opacity:.9;
+    }
+
+    .ability p{
+        margin:0;
+        font-size:.97rem;
+        line-height:1.68;
+        color:var(--text-dim);
+    }
+    .ability p + p{margin-top:8px;}
+
+    .req{
+        display:inline-block;
+        margin-bottom:9px;
+        padding:3px 10px;
+        font-size:.76rem;
+        letter-spacing:.08em;
+        text-transform:uppercase;
+        color:#ffb37a;
+        border:1px solid rgba(255,140,60,.45);
+        border-radius:999px;
+        background:rgba(255,70,0,.10);
+    }
+
+    /* Приглушённый стиль для «приколюх» */
+    .ability.soft{
+        border-left-color:#6d5a3a;
+        background:linear-gradient(135deg,
+            rgba(60,40,16,.45) 0%,
+            rgba(28,14,6,.55) 100%);
+        opacity:.92;
+    }
+    .ability.soft .num{
+        background:radial-gradient(circle at 32% 26%,
+            #d8cdb4 0%,
+            #9a7f4f 52%,
+            #5c452a 100%);
+        box-shadow:0 0 12px rgba(200,160,90,.45), inset 0 -2px 4px rgba(0,0,0,.35);
+    }
+    .ability.soft h3{color:#e8cfa0;}
+
+    /* ============ ФУТЕР ============ */
+    .colophon{
+        margin-top:60px;
+        text-align:center;
+        font-size:.76rem;
+        letter-spacing:.30em;
+        text-transform:uppercase;
+        color:rgba(232,184,115,.42);
+    }
+    .colophon .flame{
+        display:block;
+        margin:16px auto 0;
+        width:90px;
+        height:1px;
+        background:linear-gradient(90deg,
+            transparent,
+            rgba(255,120,0,.75),
+            transparent);
+    }
+
+    /* ============ АДАПТИВ ============ */
+    @media (max-width:640px){
+        .scroll{
+            padding:38px 20px 50px;
+            margin:26px auto 60px;
+        }
+        .ability{
+            padding:16px 16px 16px 16px;
+        }
+        .ability .num{
+            position:static;
+            margin-bottom:10px;
+        }
+        .params{
+            grid-template-columns:1fr;
+            padding:18px;
+        }
+        .scroll::before,.scroll::after{
+            width:34px;height:34px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- ================= ФОН: ГОРЯЩИЙ АД ================= -->
+<div class="hell" aria-hidden="true"></div>
+<div class="embers" aria-hidden="true">
+    <i style="left:4%;  animation-duration:12s; animation-delay:0s;"></i>
+    <i style="left:11%; animation-duration:15s; animation-delay:2s;"></i>
+    <i style="left:19%; animation-duration:10s; animation-delay:5s;"></i>
+    <i style="left:27%; animation-duration:17s; animation-delay:1s;"></i>
+    <i style="left:34%; animation-duration:13s; animation-delay:7s;"></i>
+    <i style="left:42%; animation-duration:11s; animation-delay:3s;"></i>
+    <i style="left:51%; animation-duration:16s; animation-delay:9s;"></i>
+    <i style="left:58%; animation-duration:12s; animation-delay:4s;"></i>
+    <i style="left:66%; animation-duration:14s; animation-delay:6s;"></i>
+    <i style="left:73%; animation-duration:10s; animation-delay:8s;"></i>
+    <i style="left:81%; animation-duration:18s; animation-delay:2.5s;"></i>
+    <i style="left:88%; animation-duration:13s; animation-delay:10s;"></i>
+    <i style="left:94%; animation-duration:15s; animation-delay:5.5s;"></i>
+    <i style="left:47%; animation-duration:19s; animation-delay:12s;"></i>
+</div>
+
+<!-- ================= СВИТОК ================= -->
+<main class="scroll">
+
+    <header>
+        <p class="over-title">Архивные данные</p>
+        <h1>Максимилиан Барсоди</h1>
+        <div class="ornament">❖ ✦ ❖</div>
+
+        <!-- Ссылка на изображение -->
+        <div class="portrait">
+            <a href=barsodi.jpg
+               target="_blank"
+               rel="noopener noreferrer"
+               title="Открыть изображение в полном размере">
+				<img src="barsodi.jpg" alt="Портрет Максимилиана Барсоди">
+                
+            </a>
+        </div>        
+    </header>
+
+    <!-- ================= ПАРАМЕТРЫ ================= -->
+    <dl class="params">
+        <div class="param"><dt>Пол</dt><dd>Мужской</dd></div>
+        <div class="param"><dt>Рост</dt><dd class="empty">—</dd></div>
+        <div class="param"><dt>Возраст</dt><dd>4000</dd></div>
+        <div class="param"><dt>Любимый запах</dt><dd>Пончики</dd></div>
+        <div class="param"><dt>Телосложение</dt><dd class="empty">—</dd></div>
+        <div class="param"><dt>Статус</dt><dd class="empty">—</dd></div>
+    </dl>
+
+    <!-- ================= АКТИВКИ ================= -->
+    <h2 class="section-title"><span>Активки</span></h2>
+
+    <article class="ability">
+        <span class="num">1</span>
+        <h3>Взгляд Властелина <span class="note">(ментальная магия)</span></h3>
+        <p><em>Условия усиления:</em> ментальная магия — открывается возможность брать массу под контроль вместо одного существа.</p>
+        <p>У вас в глазах вспыхивает символ всепожирающего змея, и, глядя в глаза, вы пронзаете душераздирающим взглядом существо и заставляете выполнить любой приказ. Любое существо становится преданным вам и обязано жизнью, ведь в его воспоминания вплетаются ложные сведения о вашей помощи. Эффект пропадает через год, и воспоминания стираются обо всём произошедшем.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">2</span>
+        <h3>Кровавая броня Барсоди <span class="note">(Магия крови Эльхара, уровень «Эксперт»)</span></h3>
+        <p>Попав по существу атакой с условием, что у цели есть кровь или подобная ей жидкость (кроме ихора), вы покрываете броней из этого вещества, увеличивая свою физическую защиту. Если цель — небожитель, то последующие атаки совершаются с преимуществом, и броня также увеличивает магическое сопротивление. Синергирует с «Пылающими латами Уробороса»: кровь кипит и создаёт оружие, формируя сталь из крови.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">3</span>
+        <h3>Демон пустыни Ваалкулус <span class="note">(Магия земли высокого уровня)</span></h3>
+        <p>Вы принимаете облик ужасающего демона, окутывая себя песчаным покровом, за пеленой которого едва различим ваш истинный облик. Это повышает сопротивление физическому урону. Находясь под действием формы, появляется возможность проникать в мелкие отверстия, но в этой форме можно совершать только атаку. Вместо ближней атаки оружием вы пронзаете существо теневым шипом, увеличивая свою дистанцию атаки.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">4</span>
+        <h3>Браслет крови</h3>
+        <p>Пронзив свою руку кинжалом, вы можете начать формировать небольшой браслет из капель крови в количестве 15 штук, нанизанных на чёрную ниточку. Бусины можно использовать в любой момент, чтобы восстановить себе немного здоровья, но не более одной за ход. Бусины также восстанавливают заряд, когда противник теряет кровь после атаки хозяина. Синергирует с «Кровавой бронёй»: при большем вкладе праны и жизненной эссенции можно получить больше бусин на старте и подпитываться +1 бусиной от атаки или получения урона.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">5</span>
+        <h3>Пылающие латы Уробороса <span class="note">(Владение магией огня и земли на должном уровне)</span></h3>
+        <p>Вы облачаетесь в латы, выкованные из первородного пламени. Доспехи увеличивают урон, добавляя к рукопашным и дальнобойным атакам огонь. Можно создать пылающие крылья, увеличивая свою скорость полёта и перемещения до половины вашей скорости ходьбы. Все снаряды в пределах метра от вас сжигаются, не долетая до вас. При совмещении стихий позволяет улучшить латы, добавляя синергию с «Кровавой бронёй Барсоди» и открывая её второй вид.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">6</span>
+        <h3>Сфера закона <span class="note">(Отключено, хоть и родная способность)</span></h3>
+        <p>Вы можете создать сферу размером 10 на 10 метров вокруг себя. Эта область считается труднопроходимой для всех, кроме вас. Вы можете создавать, уничтожать и менять вещи и существ в пределах сферы как вам угодно. Можете потратить заряд сферы, чтобы сжать её до предела вместе с сущностью, создавая кровавую филактерию. Существо в филактерии отрезано от мира, не способно говорить и накладывать заклинания. Вы можете проанализировать существо, попавшее внутрь филактерии, а также использовать каждую часть тела как компонент. Существо считается живым, но по желанию создателя сферы может испытывать боль. У сферы есть несколько вариаций по типу заключения. Чёрная филактерия позволяет сдерживать больших существ.</p>
+        <p><em>«Покрылось чёрной оболочкой изоляции, сущность, заточённую внутри, пронзило цепями и отрезало от внешнего мира, оставив её там на веки».</em><br>
+        <em>«Цвет покинул пределы сферы, время остановилось, как и сущность бытия».</em></p>
+    </article>
+
+    <article class="ability">
+        <span class="num">7</span>
+        <h3>Личина Хаоса <span class="note">(ментальная магия)</span></h3>
+        <p>Смешанное состояние при активном безумии Рааста, «Демоне пустыни Ваалкулусе» и восстановленных глазах с языком. Многократно усиливает магические способности и физическую сопротивляемость основного тела, взамен взымая свою плату в виде частички души (восстановлению подлежит, но долго). Открывает возможность пропустить нити магии мира через себя, дёргая за них и создавая акустические волновые формы, сканирующие вибрацией всю территорию в радиусе километра. Сама вибрация безвредна, но можно взаимодействовать с резонансом существа, понимая, где он находится, и направить нужные импульсы той же вибрации на его тело сквозь броню и магию тела, буквально разрушая его магические каналы изнутри и снаружи и оставляя на теле маленькие рваные раны.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">8</span>
+        <h3>Песчаный шёпот Ваалкулуса</h3>
+        <span class="req">Требует: активную форму «Демона пустыни»</span>
+        <p>Вы рассеиваете часть песчаного покрова, создавая облако мельчайших песчинок в радиусе 5 метров. Облако держится 3 хода. Все существа внутри получают помеху на броски восприятия, а вы чувствуете каждое движение внутри облака как вибрацию песка — никакая невидимость или скрытность внутри облака не работает. Если в облаке есть существо с кровью, песчинки впиваются в микро-раны, и каждый ход оно теряет небольшое количество HP. <em>Синергия с «Браслетом крови»:</em> за каждое существо, теряющее HP в облаке, вы получаете +1 заряд бусины в конце хода.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">9</span>
+        <h3>Печать первородного пламени</h3>
+        <span class="req">Требует: «Пылающие латы Уробороса»</span>
+        <p>Вы вырываете из лат осколок первородного пламени и вжигаете его в землю под ногами противника. Образуется огненная руна диаметром 2 метра. Существо, стоящее на руне, каждый ход получает урон огнём, а его броня и магическое сопротивление снижаются на фиксированное значение — пламя выжигает защитные чары. Руна горит 4 хода. <em>Синергия с «Кровавой бронёй»:</em> если у цели открыта рана (например, от «Песчаного шёпота»), пламя проникает через кровоток внутрь, и снижение брони удваивается. <em>Синергия с «Личиной Хаоса»:</em> резонансные раны от Личины становятся проводниками для пламени — урон огнём по резонансно-помеченной цели игнорирует часть магического сопротивления.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">10</span>
+        <h3>Эхо Эльхара</h3>
+        <p>Вы касаетесь существа с кровью и оставляете в его кровотоке магическую метку — «эхо». Метка невидима и не ощущается целью. В любой момент в течение боя вы можете активировать эхо, и оно заставит кровь цели резко дёрнуться к ближайшему союзнику цели, дезориентируя его: следующая атака этого существа летит в своего союзника.</p>
+    </article>
+
+    <!-- ================= ПАССИВКИ ================= -->
+    <h2 class="section-title"><span>Навыки и владения · Пассивки</span></h2>
+
+    <article class="ability">
+        <span class="num">1</span>
+        <h3>Навык адаптации тела</h3>
+        <p>Позволяет Барсоди быстрее изучать физические навыки, адаптируясь к боевой ситуации на ходу.</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">2</span>
+        <h3>Навык ускоренного мышления</h3>
+        <p>Вы можете во время боя потратить секунду на сосредоточение разума, анализируя цель и изучая её слабые стороны, что позволяет быстрее устранить цель. Синергирует с «Адаптацией тела».</p>
+    </article>
+
+    <article class="ability">
+        <span class="num">3</span>
+        <h3>Ускоренное обучение</h3>
+        <p>Позволяет быстрее читать, изучая текст с немыслимой скоростью, а также упрощает изучение магических техник на базовом этапе.</p>
+    </article>
+
+    <article class="ability soft">
+        <span class="num">4</span>
+        <h3>Острый язык <span class="note">(хрень)</span></h3>
+        <p>Знает, как говорить с разными представителями собеседников — от божеств до королей и крестьян.</p>
+    </article>
+
+    <article class="ability soft">
+        <span class="num">5</span>
+        <h3>Основа зельеварения и алхимии <span class="note">(хрень, сидим учимся)</span></h3>
+        <p>Знает базовые знания алхимии и зельеварения на уровне создания простых зелий лечения.</p>
+    </article>
+
+    <!-- ================= ПРИКОЛЮХИ ================= -->
+    <h2 class="section-title"><span>Навыки-приколюхи</span></h2>
+
+    <article class="ability soft">
+        <span class="num">1</span>
+        <h3>Мина для Ирмины <span class="note">(сломано)</span></h3>
+        <p>Позволяет устроить пиздец на ровном месте после слов-триггеров, даруя как Ирмине, так и Оленьке контент раскрытия персонажа :з</p>
+    </article>
+
+    <article class="ability soft">
+        <span class="num">2</span>
+        <h3>Стоять, бояться <span class="note">(работает наполовину)</span></h3>
+        <p>Позволяет Ирмине дать затрещину Барсоди, останавливая его от глупостей.</p>
+    </article>
+
+    <article class="ability soft">
+        <span class="num">3</span>
+        <h3>Знание языков <span class="note">(от Ирминки)</span></h3>
+        <p>Вы можете узнать от Ирмины любой язык, который она знает, попросив её об этом, и при встрече с существом, чей язык неизвестен (добавить ограничения).</p>
+    </article>
+
+    <article class="ability soft">
+        <span class="num">4</span>
+        <h3>Демон пустыни Ваалкулус <span class="note">(Ирминин)</span></h3>
+        <p>Дарует Ирминке послушного пёсика, который чуть не разорвал суть Барсоди.</p>
+    </article>
+
+    <!-- ================= ФУТЕР ================= -->
+    <footer class="colophon">
+        Составлено в архивах Эльхара
+        <span class="flame"></span>
+    </footer>
+
+</main>
+
+</body>
+</html>

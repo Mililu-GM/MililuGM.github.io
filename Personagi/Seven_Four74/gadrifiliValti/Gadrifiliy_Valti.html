@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архив Демиурга: Гадрифилий Валти</title>
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marck+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-cosmos: #050510;
+            --parchment: #f0e6d2;
+            --parchment-dark: #dcccb0;
+            --gold: #c5a059;
+            --gold-bright: #ffd700;
+            --text-dark: #1c1814;
+            --text-muted: #4a3b2c;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'EB Garamond', serif;
+            --font-script: 'Marck Script', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-cosmos);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            line-height: 1.7;
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden; /* Защита от горизонтальной прокрутки от комет */
+            position: relative;
+        }
+
+        /* =========================================
+           АНИМИРОВАННЫЙ КОСМИЧЕСКИЙ ФОН
+           ========================================= */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: var(--bg-cosmos);
+            /* Базовое звездное небо */
+            background-image: 
+                radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #aaddff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 160px 120px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 200px 20px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 250px 150px, #88ccff, rgba(0,0,0,0)),
+                radial-gradient(ellipse at 50% 50%, #15152e 0%, #050510 80%);
+            background-size: 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 100% 100%;
+            overflow: hidden;
+        }
+
+        /* Мерцающие звезды */
+        .twinkling-stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="20" cy="30" r="1.5" fill="%23fff" opacity="0.8"/%3E%3Ccircle cx="80" cy="90" r="2" fill="%23ffd700" opacity="0.9"/%3E%3Ccircle cx="150" cy="40" r="1" fill="%23aaddff" opacity="0.7"/%3E%3Ccircle cx="180" cy="160" r="1.5" fill="%23fff" opacity="0.6"/%3E%3Ccircle cx="40" cy="180" r="2" fill="%23fff" opacity="0.8"/%3E%3C/svg%3E') repeat;
+            background-size: 250px 250px;
+            animation: twinkle 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* Падающие кометы */
+        .comet {
+            position: absolute;
+            width: 150px;
+            height: 2px;
+            /* Светящийся хвост кометы */
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(170,221,255,0.8) 50%, #fff 100%);
+            border-radius: 50%;
+            transform: rotate(45deg);
+            opacity: 0;
+            /* Тень для свечения головы */
+            box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.6);
+            animation: shoot 6s linear infinite;
+        }
+
+        /* Настройка траекторий и задержек для разных комет */
+        .comet-1 { top: -5%; left: 0%; animation-duration: 5s; animation-delay: 1s; }
+        .comet-2 { top: 15%; left: 20%; animation-duration: 7s; animation-delay: 3s; }
+        .comet-3 { top: 5%; left: 50%; animation-duration: 6s; animation-delay: 5s; }
+        .comet-4 { top: 35%; left: -10%; animation-duration: 8s; animation-delay: 7s; }
+        .comet-5 { top: -10%; left: 80%; animation-duration: 4s; animation-delay: 2s; }
+
+        @keyframes shoot {
+            0% { 
+                transform: translateX(-200px) translateY(-200px) rotate(45deg); 
+                opacity: 0; 
+            }
+            5% { 
+                opacity: 1; 
+            }
+            20% { 
+                transform: translateX(1500px) translateY(1500px) rotate(45deg); 
+                opacity: 1; 
+            }
+            25% { 
+                transform: translateX(1700px) translateY(1700px) rotate(45deg); 
+                opacity: 0; 
+            }
+            100% { 
+                opacity: 0; 
+            }
+        }
+
+        /* =========================================
+           СТИЛИ КНИГИ (Без изменений)
+           ========================================= */
+        .grimoire {
+            max-width: 950px;
+            width: 100%;
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 
+                0 0 60px rgba(197, 160, 89, 0.15),
+                inset 0 0 30px rgba(0,0,0,0.9);
+            border: 3px solid var(--gold);
+            position: relative;
+            z-index: 1;
+        }
+
+        .grimoire::before, .grimoire::after {
+            content: '✦';
+            position: absolute;
+            color: var(--gold-bright);
+            font-size: 2.5rem;
+            line-height: 1;
+            text-shadow: 0 0 10px var(--gold-bright);
+        }
+        .grimoire::before { top: 15px; left: 20px; }
+        .grimoire::after { bottom: 15px; right: 20px; }
+
+        .pages {
+            background-color: var(--parchment);
+            background-image: 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, var(--parchment), var(--parchment-dark));
+            padding: 4rem;
+            border-radius: 6px;
+            border: 1px solid #b89b6a;
+            box-shadow: inset 0 0 50px rgba(139, 104, 38, 0.2);
+            position: relative;
+        }
+
+        .pages::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 25px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(139, 104, 38, 0.4), transparent);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+
+        .title-page {
+            text-align: center;
+            padding-bottom: 3rem;
+            margin-bottom: 3rem;
+            border-bottom: 3px double var(--gold);
+        }
+
+        .title-page h1 {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            color: #111;
+            text-shadow: 1px 1px 0 var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .title-page .subtitle {
+            font-family: var(--font-script);
+            font-size: 1.8rem;
+            color: var(--text-muted);
+        }
+
+        .section-block {
+            margin-bottom: 4rem;
+        }
+
+        .iteration-title {
+            font-family: var(--font-title);
+            font-size: 2.4rem;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 0 rgba(197, 160, 89, 0.4);
+        }
+
+        .iteration-title::after {
+            content: '✦ ✧ ✦';
+            display: block;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-top: 10px;
+            letter-spacing: 6px;
+            text-shadow: none;
+        }
+
+        .section-block h2 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .section-block h2::after {
+            content: '✦';
+            display: block;
+            color: var(--gold);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .image-frame {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto 2rem auto;
+            padding: 12px;
+            background: linear-gradient(135deg, #b89b6a, #6b4e1b);
+            border-radius: 6px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4), inset 0 0 10px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .image-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 2px solid #111;
+            border-radius: 3px;
+            filter: sepia(15%) contrast(1.05);
+        }
+
+        .image-frame::before, .image-frame::after {
+            content: '✧';
+            position: absolute;
+            color: var(--gold-bright);
+            font-size: 2rem;
+            text-shadow: 0 0 8px var(--gold-bright);
+        }
+        .image-frame::before { top: -15px; left: -15px; }
+        .image-frame::after { bottom: -15px; right: -15px; }
+
+        .quote {
+            font-family: var(--font-script);
+            font-size: 1.7rem;
+            text-align: center;
+            color: var(--text-muted);
+            margin: 1.5rem 0 2.5rem 0;
+            padding: 0 3rem;
+            position: relative;
+        }
+
+        .quote::before, .quote::after {
+            content: '«';
+            font-size: 3rem;
+            color: var(--gold);
+            position: absolute;
+            opacity: 0.7;
+        }
+        .quote::before { left: 0; top: -15px; }
+        .quote::after { content: '»'; right: 0; bottom: -25px; }
+
+        .text-content p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .text-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+        }
+
+        .text-content li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .text-content li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 1rem;
+            top: 6px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+
+        .ability-title {
+            font-weight: 600;
+            color: #1a1a2e;
+            font-style: italic;
+            font-size: 1.3rem;
+        }
+
+        /* Стили для комментариев Легиона */
+        .meta-comment {
+            display: block;
+            font-family: var(--font-script);
+            color: #4527a0;
+            font-size: 1.45rem;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            padding: 10px 18px;
+            border-left: 3px solid #7e57c2;
+            background: linear-gradient(90deg, rgba(126, 87, 194, 0.1) 0%, rgba(126, 87, 194, 0) 100%);
+            border-radius: 0 6px 6px 0;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(126, 87, 194, 0.05);
+            text-align: left;
+        }
+
+        .meta-comment::before {
+            content: '✧';
+            color: #7e57c2;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            display: inline-block;
+            animation: pulse 3s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; text-shadow: 0 0 2px #7e57c2; }
+            100% { opacity: 1; text-shadow: 0 0 10px #7e57c2; }
+        }
+
+        .drop-cap::first-letter {
+            font-family: var(--font-title);
+            font-size: 4rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 12px;
+            margin-top: 6px;
+            color: #1a1a2e;
+            text-shadow: 2px 2px 0 var(--gold);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: rgba(197, 160, 89, 0.15);
+            padding: 1.5rem;
+            border-left: 4px solid var(--gold);
+            border-radius: 3px;
+        }
+
+        .stats-grid div {
+            font-size: 1.15rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 3rem 0;
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            .pages { padding: 2rem 1.5rem; }
+            .title-page h1 { font-size: 2.5rem; }
+            .iteration-title { font-size: 1.8rem; }
+            .section-block h2 { font-size: 1.4rem; }
+            .quote { font-size: 1.4rem; padding: 0 1rem; }
+            .ability-title { font-size: 1.2rem; }
+            .meta-comment { font-size: 1.25rem; padding: 8px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Фоновый космос -->
+    <div class="space-bg">
+        <div class="twinkling-stars"></div>
+        <div class="comet comet-1"></div>
+        <div class="comet comet-2"></div>
+        <div class="comet comet-3"></div>
+        <div class="comet comet-4"></div>
+        <div class="comet comet-5"></div>
+    </div>
+
+    <!-- Сама книга -->
+    <div class="grimoire">
+        <div class="pages">
+            
+            <!-- Титульная страница -->
+            <header class="title-page">
+                <h1>Гадрифилий Валти</h1>
+                <div class="subtitle">Перевод имени с языка демиургов (Звёздный Ткач)</div>
+            </header>
+
+            <!-- Страница 1 (Картинка + Текст) -->
+            <section class="section-block">
+                <div class="image-frame">
+                    <img src="Gafi.jpg" alt="Звёздный Ткач">
+                </div>
+                
+                <h2>Общие данные</h2>
+                <div class="stats-grid">
+                    <div><strong>Пол:</strong> Мужской</div>
+                    <div><strong>Рост:</strong> 178</div>
+                    <div><strong>Возраст:</strong> 10 млн. лет</div>
+                    <div><strong>Элемент Демиурга:</strong> Космос</div>
+                </div>
+
+                <h2>Способности</h2>
+                <div class="text-content">
+                    <ul>
+                        <li><span class="ability-title">Абсолютное видение аур</span> – различает все цвета и оттенки аур живых существ и предметов. Позволяет видеть малейшие всполохи эмоций, их застывшие отпечатки на вещах, токи лей-линий, а также безошибочно определять природу создания по свечению его ауры.</li>
+                        <li><span class="ability-title">Влияние на ауру</span> – дар дистанционно воздействовать на чужую ауру, изменяя её строение: усиливать или ослаблять переживания, полностью лишать эмоций либо сжимать ауру в ослепительную точку и разрывать её на части — без помощи ментальных нитей.</li>
+                        <li><span class="ability-title">Кровь демиурга</span> – дарует неподвластность большинству ядов (за абсолютным исключением «Затмения»), многократно расширяет магический потенциал, обостряет врождённые способности, позволяет подчинять реальность собственной воле (ограничен в границах Эльхара), изменяет окраску ауры на ту, что присуща демиургу, и делает ауру полностью нечитаемой.</li>
+                        <li><span class="ability-title">Ментальная сеть</span> – тончайшая паутина, оберегающая подсознание от внешних вторжений, мгновенно извещающая о чужом проникновении и служащая буфером, смягчающим силу ментальных атак.</li>
+                        <li><span class="ability-title">Острые нити</span> – туго скрученные пряди ментальной магии, способные рассечь почти любой материал, если придать им форму режущего инструмента. Могут использоваться вместо обычных нитей.</li>
+                        <li><span class="ability-title">Артефактор (Ваятель)</span> – искусство творить предметы любого толка из самых разных материалов, наделяя их заданными качествами и характеристиками. Пробуждается лишь в присутствии артефакта ваяния (ограничена в пределах Эльхара).</li>
+                        <li><span class="ability-title">Глас мира</span> – весть, одновременно звучащая в каждом на избранной территории, проникающая в разум слышащих и способная полностью подчинить их волю.</li>
+                        <li><span class="ability-title">Кукловод</span> – усовершенствованная власть над душой, позволяющая совершать любые манипуляции телом без малейшего сопротивления, в том числе говорить устами подконтрольного существа.</li>
+                        <li><span class="ability-title">Алхимический магистр</span> – абсолютное постижение сути элементов и искусства их сочетания для получения любого желаемого результата.</li>
+                        <li><span class="ability-title">Коллекционер воспоминаний</span> – в миг уничтожения души извлекает из неё эссенцию, сотканную из памяти и пережитых чувств. Поглощая эту эссенцию, носитель обретает воспоминания жертвы и насыщает магические каналы энергией эмоций.</li>
+                    </ul>
+
+                    <h2>Особенности</h2>
+                    <ul>
+                        <li>Слепота</li>
+                        <li><span class="ability-title">Алхимическое сердце</span> – вечный двигатель, заключённый в его грудной клетке и поддерживающий его жизнедеятельность. (Единственное что может вернуть способность «Кровь демиурга», работая как алхимический котёл)</li>
+                        <li><span class="ability-title">Курение алакса</span> – курение специальной смеси, позволяющее видеть галлюцинации из воспоминаний и чувств, а также остужающее сердце и восполняющее силы.</li>
+                    </ul>
+
+                    <h2>Итерации</h2>
+                    <p>Алхимик • Аристократ • Кукловод • Легион • Палач • Святой • Тишина • Трикстер</p>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 1: Аристократ -->
+            <section class="section-block">
+                <h1 class="iteration-title">Аристократ</h1>
+                <div class="image-frame">
+                    <img src="aristo.jpg" alt="Аристократ">
+                </div>
+                <div class="quote">В вас нет и капли чести и манер господа… В прочем у таких как вы их быть не может</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> Дворянин, Герцог, Монарх</p>
+                    <p><strong>Путь:</strong> Путь Прощения</p>
+                    <p><strong>Циклы:</strong> с 1 по 1134</p>
+                    <p><strong>Тип Ваяния:</strong> Инструменты маскировки, шпионажа, канцелярия, гримуары, одежда.</p>
+                    <p><strong>Тип нитей:</strong> Нити-информаторы – вплетаясь в существо, сканируют его, выявляя его самые большие страхи и желания</p>
+                    <p><strong>Любимый запах:</strong> Чёрный табак</p>
+                    <p><strong>Любимый цветок:</strong> Белые розы</p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Зеркало этикета</span> (Улучшение: Ментальная сеть) – защитный механизм, мгновенно отражающий любую ментальную атаку, манипуляцию или проклятие обратно в агрессора в той форме, которая будет наиболее губительна для его социального статуса или самооценки.</li>
+                        <li><span class="ability-title">Величие Лорда</span> – аура, подавляющая существ порядком ниже. (Радиус и сила...)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 2: Алхимик -->
+            <section class="section-block">
+                <h1 class="iteration-title">Алхимик</h1>
+                <div class="image-frame">
+                    <img src="alhimi.jpg" alt="Алхимик">
+                </div>
+                <div class="quote">Взболтать, но не смешивать… Хотя, интересно, а что если смешать?</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> Чумной доктор, Отравитель, Аспид</p>
+                    <p><strong>Путь:</strong> Путь Прощения</p>
+                    <p><strong>Циклы:</strong> с 1134 по 2309</p>
+                    <p><strong>Тип Ваяния:</strong> Алхимические инструменты, средства защиты, расходники, химическое оружие и пиротехника.</p>
+                    <p><strong>Тип нитей:</strong> Нити-сборщики – вплетаясь в существо, сканируют его природу, определяя слабые и сильные стороны, выделяя полезные для экспериментов органы, железы, способные вытягивать биологические жидкости. На неживые предметы работают как глубокий сканер, определяя возможные точки ваяния и характеристики.</p>
+                    <p><strong>Нити-инъекторы</strong> - вплетаясь в существо, могут вводить в него жидкости из заготовлены заранее резервуаров, к которым будут подключены.</p>
+                    <p><strong>Любимый запах:</strong> Формалин</p>
+                    <p><strong>Любимый цветок:</strong> Одуванчики</p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Magnum Opus</span> (Улучшение: Алхимический магистр) – Полное погружение в исследование и/или эксперимент, с целью создания нового или усовершенствования старого до степени идеала. Проведение иных исследований не связанных с приоритетным приостанавливается. (Игромеханический аспект: броски, связанные с этим исследованием и смежным ему получают преимущество)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 3: Кукловод -->
+            <section class="section-block">
+                <h1 class="iteration-title">Кукловод</h1>
+                <div class="image-frame">
+                    <img src="kuklovod.jpg" alt="Кукловод">
+                </div>
+                <div class="quote">Какая замечательная куколка. Будешь чудным пополнением моей коллекции</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> Кукольник, Манипулятор, Серый Кардинал</p>
+                    <p><strong>Путь:</strong> Путь Мести</p>
+                    <p><strong>Циклы:</strong> с 2309 по 3185</p>
+                    <p><strong>Тип Ваяния:</strong> Ментальная магия, магия иллюзий, магия превращения, инструменты контроля и сдерживания.</p>
+                    <p><strong>Тип нитей:</strong> Нити-разума – вплетаясь в тело, передают, то что видит, слышит, чувствует и о чём мыслит объект возможность изменить любой из параметров.</p>
+                    <p><strong>Любимый запах:</strong> Яблоки</p>
+                    <p><strong>Любимый цветок:</strong> Цветок граната</p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Сценарий</span> (Улучшение: Кукловод) – Пойманному существу, может быть надиктован определённый паттерн поведений, уничтожая личность, воспоминания, эмоции, желания, заменяя их на необходимые «постановке».</li>
+                        <li><span class="ability-title">Коллекция</span> – подчинённые Сценарию марионетки могут быть помещены в карманное измерение для дальнейшего использования и переноса. Объекты, помещённые в подобную резервацию, не нуждаются во сне, пище и питье. Вмещает в себя порядка 15 существ среднего размера и 10 большого.</li>
+                        <li><span class="ability-title">Мастер-кукольник</span> – способен изготовить на основе любого живого существа его точную копию в виде куклы. Кукла тем натуральнее чем больше известно об объекте, в плоть до расположения мельчайших деталей. Кукла может существовать автономно, а также беспрекословно выполняет любые команды.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 4: Тишина -->
+            <section class="section-block">
+                <h1 class="iteration-title">Тишина</h1>
+                <div class="image-frame">
+                    <img src="tihina.jpg" alt="Тишина">
+                </div>
+                <div class="quote">Помолчи вместе со мной… Послушай как прекрасен мир вокруг</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> Безмолвный, Забытый, Отшельник</p>
+                    <p><strong>Путь:</strong> Путь Мести</p>
+                    <p><strong>Циклы:</strong> с 3185 по 3467</p>
+                    <p><strong>Тип Ваяния:</strong> Чувства, эмоции, впечатления, органы чувств и их модификации</p>
+                    <p><strong>Тип нитей:</strong> Нити-резонанса – входя в контакт с барьерами, не вызывают помех на их поверхности резонируя с ними разрушая</p>
+                    <p><strong>Любимый запах:</strong> нет любимого запаха, т.к. не чувствует их.</p>
+                    <p><strong>Любимый цветок:</strong> Гипсофилы</p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Свежевание разума</span> (Улучшение: Коллекционер воспоминаний) – количество выделяемой эссенции как и её качество повышается, а так же появляется возможность изъять воспоминания у ещё живого существа без его убийства, но при этом разрушая психику, вызывая психозы.</li>
+                        <li><span class="ability-title">Шёлковая защита</span> (Улучшение: Острые нити) – нити пронизывают всё тело, не влияя на носителя, но при физическом воздействии на них нанося вред атакующему, либо иному существу на которое не была произведена настройка. Нити отличаются значительной прочностью и способны прорезать большую часть материалов, за исключением небольшого списка обладающего абсолютным иммунитетом. При использовании противником оружия, уничтожают оружие, а также перетекая по нему добираются до конечностей.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 5: Палач -->
+            <section class="section-block">
+                <h1 class="iteration-title">Палач</h1>
+                <div class="image-frame">
+                    <img src="palah.jpg" alt="Палач">
+                </div>
+                <div class="quote">Взываешь к милосердию… Пожалуй откажусь</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> Тиран, Каратель, Инквизитор</p>
+                    <p><strong>Путь:</strong> Путь Мести</p>
+                    <p><strong>Циклы:</strong> с 3467 по 4562</p>
+                    <p><strong>Тип Ваяния:</strong> Холодное оружие, броня, пыточные инструменты, кузнечные инструменты</p>
+                    <p><strong>Тип нитей:</strong> Нити-кузнеца – способны абсорбировать в себя особенности любого металла кроме антимагического и небесного берилла. Способны латать броню и механизмы.</p>
+                    <p><strong>Любимый запах:</strong> Кровь</p>
+                    <p><strong>Любимый цветок:</strong> Пионы</p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Карающая длань</span> – в порыве ненависти, может убить существо мгновенно. (Игромеханический аспект: бросок кубиков 20, 19, 18, 17)</li>
+                        <li><span class="ability-title">Кровавый пакт</span> – обагряя клинок в своей крови, насыщает металл своей силой, улучшая его характеристики. (Эффект прямо пропорционален способности «Кровь демиурга» и количеству «испитой» клинком крови)</li>
+                        <li><span class="ability-title">Приговор</span> – В руках появляется свиток с обвинительным приговором по мере прочтения которого в воздухе появляются письмена, ложащиеся на лезвие клинка, усиливая его. Чем длиннее список и чем более серьёзные преступления были совершены, тем сильнее будет воздействие.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 6: Святой -->
+            <section class="section-block">
+                <h1 class="iteration-title">Святой</h1>
+                <div class="image-frame">
+                    <img src="svitoi.jpg" alt="Святой">
+                </div>
+                <div class="quote">Прости… Я вынужден это сделать…</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> Целитель, Мученик</p>
+                    <p><strong>Путь:</strong> Путь Прощения</p>
+                    <p><strong>Циклы:</strong> с 4562 по 4563</p>
+                    <p><strong>Тип Ваяния:</strong> Универсальный.</p>
+                    <p><strong>Тип нитей:</strong> Нити-целителя – способны латать тело и душу, не оставляя шрамов. Усиливают проходящую через них магию исцеления. Не способны наносить предумышленный вред, но обладают большей сдерживающей силой.</p>
+                    <p><strong>Любимый запах:</strong> Чёрные ромашки</p>
+                    <p><strong>Любимый цветок:</strong> Чёрные ромашки</p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Искупление</span> - Подавляет любое негативное психическое воздействие, выводя из строя часть магических каналов, выжигая их изнутри истощая приток праны по ним на срок до месяца. Чем сильнее воздействие, тем больше каналов. Может быть частично передана, в виде более слабой формы, без утраты, особенностей, либо передана в полной мере, с целью сохранения полной силы защиты. Так же блокирует доступ в выбранные области подсознания, без настройки на существо.</li>
+                        <li><span class="ability-title">Касание звёзд</span> (Улучшение: Ваятель) – артефакты созданные в звёздную ночь имеют больший потенциал и магическую мощь в сравнении с остальными. Так же есть возможность создать 1 артефакт астрального уровня (8 ячеек изменения), а так же позволяет упрощает работу с небесным бериллом и астральной магией.</li>
+                        <li><span class="ability-title">Блаженный сон</span> - почти абсолютный магический сон, не поддающийся развеиванию, никем кроме наложившего его заклинателя. Уснувший видит счастливые моменты из воспоминаний, а также исцеляется</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 7: Трикстер -->
+            <section class="section-block">
+                <h1 class="iteration-title">Трикстер</h1>
+                <div class="image-frame">
+                    <img src="trikster.jpg" alt="Трикстер">
+                </div>
+                <div class="quote">Тебе не смешно? Как жаль... Что мне всё равно. Хахаха</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> Шут, Дурак, Циркач</p>
+                    <p><strong>Путь:</strong> Путь Прощения</p>
+                    <p><strong>Циклы:</strong> с 4563 по 5000</p>
+                    <p><strong>Тип Ваяния:</strong> Игрушки для любовных утех, средства контрацепции и повышения рождаемости, афродизиаки, возбудители, наркотики, алкоголь, огнестрельное оружие.</p>
+                    <p><strong>Тип нитей:</strong> Нити-лозы – оплетая душу способны выпускать различные вещества воздействуя непосредственно на неё</p>
+                    <p><strong>Любимый запах:</strong> Апельсиновый чай с ромом</p>
+                    <p><strong>Любимый цветок:</strong> Маки</p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Ганфайтер</span> – огнестрельное оружие в его руках никогда не даёт осечку, но и никогда не выстрелит в него. Стрельба «от бедра» не снижает точность, а также перезарядка занимает меньше времени. Если стрелок направляет на него оружие в зоне видимости, оно никогда не выстрелит в него. (Блокировка механизмов нитями)</li>
+                        <li><span class="ability-title">Поцелуй</span> – оставляет метки, которые могут стать невидимыми. Активация происходит за счёт слюны, либо принудительно, но болезненно. В зависимости от цвета, красное/чёрное высвобождается спектр позитивных или негативных эмоций соответственно. В стандартных условиях не несёт угрозы, но при повышении концентрации способен вызвать перегрузку и галлюцинации у жертвы, провоцируя неконтролируемое влечение или агрессию соответственно.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Итерация 8: Легион -->
+            <section class="section-block">
+                <h1 class="iteration-title">Легион</h1>
+                <div class="image-frame">
+                    <img src="legion.jpg" alt="Легион">
+                </div>
+                <div class="quote">Здравствуй дорогой читатель… Ну что ж давайте знакомиться ближе</div>
+                
+                <div class="text-content">
+                    <p><strong>Дополнительные прозвища:</strong> - 
+                        <span class="meta-comment">Я уникален в своём разнообразии, душенька</span>
+                    </p>
+                    <p><strong>Путь:</strong> Путь Единства 
+                        <span class="meta-comment">Я не совсем они, а потому и путь у меня другой, там дальше почитаешь</span>
+                    </p>
+                    <p><strong>Циклы:</strong> с 1 по 5000 
+                        <span class="meta-comment">От начала и до конца... Интересно, чем всё в итоге закончится</span>
+                    </p>
+                    <p><strong>Тип Ваяния:</strong> Универсальный. 
+                        <span class="meta-comment">Не могу назвать себя абсолютным гуру, но так или иначе способен на многое</span>
+                    </p>
+                    <p><strong>Тип нитей:</strong> Теневые нити – сотканные из праны и теней, способны принимать вполне осязаемый и видимый облик, а воздействие тем сильнее чем больше вокруг теней. Могут принимать любой облик по желанию, от классических нитей до рук и иных частей тела. 
+                        <span class="meta-comment">Не стоит играть со мной ночью</span>
+                    </p>
+                    <p><strong>Любимый запах:</strong> Ирисы</p>
+                    <p><strong>Любимый цветок:</strong> Ирисы 
+                        <span class="meta-comment">Поговаривают, что пурпурные ирисы — знак королевской власти, но я люблю их отнюдь не из-за этого</span>
+                    </p>
+                    
+                    <h3>Особые или улучшенные способности:</h3>
+                    <ul>
+                        <li><span class="ability-title">Магистр астральной магии</span> – В совершенстве владеет астральной магией всех школ и направлений, а также способен усиливать её воздействие, находясь в астральной форме. 
+                            <span class="meta-comment">Звёзды довольно пластичны и с ними весьма приятно работать. Хоть небо здесь и другое, но полагаю я смогу с ним совладать</span>
+                        </li>
+                        <li><span class="ability-title">Астральная форма</span> (Улучшение: Кровь демиурга) – тело видоизменяется высвобождая звёздную сущность. Магия ниже экспертного уровня, а также оружие из большинства материалов не оказывает эффекта, во время действия формы. Может абсорбировать магический потенциал выпустив его в виде импульса. Форма вытягивает большое количество энергии иссушая всё вокруг, в том числе и из живых существ, в противном случае стремительно опустошая магические каналы Гафия. 
+                            <span class="meta-comment">Узреть такое можно лишь единожды, смотри внимательнее... как на тебя будет падать небо</span>
+                        </li>
+                        <li><span class="ability-title">Единство</span> – Способен использовать любые из вышеуказанных нитей и способностей, объединяясь с соответствующими итерациями путём единения души. 
+                            <span class="meta-comment">Когда-то я был Единством, а не Легионом... в прочем это уже давно в прошлом</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</body>
+</html>

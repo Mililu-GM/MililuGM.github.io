@@ -3,770 +3,316 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Библиотека Рионисии Луфар</title>
-
-<!--
-  ═══════════════════════════════════════════════════════════════
-  БИБЛИОТЕКА РИОНИСИИ ЛУФАР — СРЕДНЕВЕКОВАЯ ПОЛКА
-  ═══════════════════════════════════════════════════════════════
-  Проверьте имена файлов в href (2 места ниже):
-    → tractat-amplification.html
-    → tractat-poisons.html
-  
-  Как добавить новую книгу:
-    1. Раскомментируйте блок <a class="book ..."> внутри нужной полки
-    2. Укажите href="new-file.html"
-    3. Добавьте CSS-правило .book--name в разделе «ЦВЕТА КНИГ»
-  ═══════════════════════════════════════════════════════════════
--->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&display=swap" rel="stylesheet">
-
+<title>Хроники Эльхара — Стартовая страница</title>
 <style>
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-
-  :root {
-    --wall-1: #1a1208;
-    --wall-2: #0a0603;
-    --wood-1: #4a2e15;
-    --wood-2: #3a220d;
-    --wood-3: #251506;
-    --wood-4: #0f0803;
-    --gold: #b89548;
-    --gold-bright: #d4b566;
-    --iron-1: #6a5a3a;
-    --iron-2: #3a2a10;
-    --iron-3: #1a0e04;
-    --page-cream: #f0e5cd;
-  }
-
-  /* ═══════════ КАМЕННАЯ СТЕНА ═══════════ */
-  body {
-    margin: 0;
-    padding: 50px 20px 80px;
-    min-height: 100vh;
-    font-family: 'PT Serif', Georgia, serif;
-    color: #d8c8a8;
-    background-color: var(--wall-2);
-    background-image:
-      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(180, 110, 40, 0.14), transparent 70%),
-      radial-gradient(ellipse 50% 30% at 20% 20%, rgba(80, 50, 20, 0.10), transparent 60%),
-      radial-gradient(ellipse 50% 30% at 80% 70%, rgba(60, 40, 15, 0.08), transparent 60%),
-      repeating-linear-gradient(0deg,
-        transparent 0, transparent 63px,
-        rgba(0, 0, 0, 0.35) 63px, rgba(0, 0, 0, 0.45) 64px),
-      repeating-linear-gradient(90deg,
-        transparent 0, transparent 127px,
-        rgba(0, 0, 0, 0.28) 127px, rgba(0, 0, 0, 0.38) 128px,
-        transparent 128px, transparent 255px,
-        rgba(0, 0, 0, 0.18) 255px, rgba(0, 0, 0, 0.28) 256px),
-      linear-gradient(180deg, var(--wall-1) 0%, var(--wall-2) 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
-  }
-
-  /* ═══════════ ЗАГОЛОВОК ═══════════ */
-  .library-header {
-    text-align: center;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 2;
-    max-width: 720px;
-  }
-
-  .library-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8em;
-    font-weight: 900;
-    font-style: italic;
-    color: var(--gold-bright);
-    margin: 0;
-    line-height: 1.1;
-    letter-spacing: 0.02em;
-    text-shadow:
-      0 0 40px rgba(212, 181, 102, 0.22),
-      0 2px 4px rgba(0, 0, 0, 0.95);
-  }
-
-  .library-tagline {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 0.9em;
-    color: #7a5f28;
-    margin: 12px 0 0;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-  }
-
-  .ornament {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin: 18px auto;
-    max-width: 320px;
-  }
-  .ornament::before,
-  .ornament::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--iron-1), transparent);
-  }
-  .ornament .diamond {
-    width: 7px;
-    height: 7px;
-    background: var(--gold);
-    transform: rotate(45deg);
-    box-shadow: 0 0 10px rgba(184, 149, 72, 0.6);
-  }
-
-  /* ═══════════ БИБЛИОТЕКА ═══════════ */
-  .library {
-    width: 100%;
-    max-width: 780px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .shelf {
-    margin-bottom: 30px;
-    position: relative;
-  }
-
-  .books-stage {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 55px;
-    padding: 20px 50px 0;
-    min-height: 500px;
-    perspective: 1400px;
-    perspective-origin: 50% 100%;
-    position: relative;
-  }
-
-  .shelf--empty .books-stage { min-height: 130px; }
-  .shelf--empty .plank { opacity: 0.65; }
-
-  /* ═══════════ ДЕРЕВЯННАЯ ПОЛКА ═══════════ */
-  .plank {
-    position: relative;
-    width: 100%;
-    height: 28px;
-    background-image:
-      repeating-linear-gradient(90deg,
-        transparent 0, transparent 18px,
-        rgba(0, 0, 0, 0.12) 18px, rgba(0, 0, 0, 0.12) 19px),
-      repeating-linear-gradient(0deg,
-        rgba(90, 55, 25, 0.18) 0, rgba(90, 55, 25, 0.18) 1px,
-        transparent 1px, transparent 5px),
-      linear-gradient(180deg,
-        var(--wood-1) 0%,
-        var(--wood-2) 18%,
-        var(--wood-3) 55%,
-        var(--wood-4) 100%);
-    border-top: 2px solid #7a5220;
-    border-radius: 2px;
-    box-shadow:
-      0 12px 32px rgba(0, 0, 0, 0.95),
-      0 24px 50px rgba(0, 0, 0, 0.75),
-      inset 0 2px 3px rgba(200, 150, 90, 0.18),
-      inset 0 -3px 6px rgba(0, 0, 0, 0.75);
-  }
-
-  .plank::before,
-  .plank::after {
-    content: "";
-    position: absolute;
-    top: -8px;
-    width: 34px;
-    height: 44px;
-    background:
-      linear-gradient(180deg,
-        #7a6a4a 0%,
-        var(--iron-1) 20%,
-        var(--iron-2) 60%,
-        var(--iron-3) 100%);
-    border: 1px solid #4a3a1a;
-    border-radius: 2px;
-    box-shadow:
-      inset 0 1px 1px rgba(255, 220, 150, 0.15),
-      inset 0 -2px 3px rgba(0, 0, 0, 0.6),
-      0 3px 6px rgba(0, 0, 0, 0.7);
-    z-index: 1;
-  }
-  .plank::before { left: 18px; }
-  .plank::after  { right: 18px; }
-
-  /* ═══════════ КНИГА — УНИВЕРСАЛЬНАЯ КОНСТРУКЦИЯ ═══════════ */
-  .book {
-    --leather-1: #3a1810;
-    --leather-2: #1f0a06;
-    --accent: #b89548;
-    --glow-color: rgba(184, 149, 72, 0.4);
-
-    display: block;
-    width: 145px;
-    height: 470px;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    transform-origin: bottom center;
-    transition:
-      transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
-      filter 0.35s ease;
-    filter: drop-shadow(5px 12px 22px rgba(0, 0, 0, 0.9));
-    outline: none;
-    will-change: transform;
-  }
-
-  .book::after {
-    content: "";
-    position: absolute;
-    bottom: -6px;
-    left: 8%;
-    width: 84%;
-    height: 12px;
-    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.95), transparent 70%);
-    z-index: -1;
-    border-radius: 50%;
-    filter: blur(2px);
-  }
-
-  .book:hover,
-  .book:focus-visible {
-    transform: translateY(-18px) rotate(-1.2deg);
-    filter: drop-shadow(8px 22px 32px rgba(0, 0, 0, 0.95));
-  }
-
-  .book:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 6px;
-    border-radius: 6px;
-  }
-
-  /* ═══════════ КОРЕШОК ═══════════ */
-  .book-spine {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 3px 7px 7px 3px;
-    overflow: hidden;
-    background-color: var(--leather-1);
-    background-image:
-      radial-gradient(ellipse 35% 18% at 25% 28%, rgba(0, 0, 0, 0.28), transparent 70%),
-      radial-gradient(ellipse 28% 14% at 72% 65%, rgba(0, 0, 0, 0.22), transparent 70%),
-      radial-gradient(ellipse 22% 12% at 45% 82%, rgba(255, 220, 150, 0.06), transparent 70%),
-      radial-gradient(ellipse 30% 15% at 80% 20%, rgba(0, 0, 0, 0.2), transparent 70%),
-      linear-gradient(180deg,
-        transparent 0%, transparent 9.5%,
-        rgba(0, 0, 0, 0.65) 9.5%, rgba(255, 220, 150, 0.22) 10%, rgba(0, 0, 0, 0.75) 10.5%,
-        transparent 10.5%, transparent 19.5%,
-        rgba(0, 0, 0, 0.65) 19.5%, rgba(255, 220, 150, 0.22) 20%, rgba(0, 0, 0, 0.75) 20.5%,
-        transparent 20.5%, transparent 79.5%,
-        rgba(0, 0, 0, 0.65) 79.5%, rgba(255, 220, 150, 0.22) 80%, rgba(0, 0, 0, 0.75) 80.5%,
-        transparent 80.5%, transparent 89.5%,
-        rgba(0, 0, 0, 0.65) 89.5%, rgba(255, 220, 150, 0.22) 90%, rgba(0, 0, 0, 0.75) 90.5%,
-        transparent 90.5%),
-      linear-gradient(135deg, var(--leather-1) 0%, var(--leather-2) 100%);
-    box-shadow:
-      inset 0 0 0 1px rgba(0, 0, 0, 0.55),
-      inset 0 0 90px rgba(0, 0, 0, 0.45),
-      inset 3px 0 6px rgba(0, 0, 0, 0.5),
-      inset -4px 0 8px rgba(255, 220, 150, 0.06);
-    transition: box-shadow 0.35s ease;
-    z-index: 2;
-  }
-
-  .book:hover .book-spine,
-  .book:focus-visible .book-spine {
-    box-shadow:
-      inset 0 0 0 1px rgba(0, 0, 0, 0.55),
-      inset 0 0 90px rgba(0, 0, 0, 0.45),
-      inset 3px 0 6px rgba(0, 0, 0, 0.5),
-      inset -4px 0 8px rgba(255, 220, 150, 0.1),
-      0 0 38px var(--glow-color);
-  }
-
-  .book-spine::before,
-  .book-spine::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 16px;
-    background:
-      linear-gradient(180deg,
-        #8a7a5a 0%,
-        var(--iron-1) 22%,
-        var(--iron-2) 62%,
-        var(--iron-3) 100%);
-    border-top: 1px solid #a89a70;
-    border-bottom: 1px solid #0a0503;
-    box-shadow:
-      inset 0 1px 1px rgba(255, 230, 180, 0.35),
-      inset 0 -2px 2px rgba(0, 0, 0, 0.6),
-      0 2px 3px rgba(0, 0, 0, 0.7);
-    z-index: 5;
-  }
-  .book-spine::before { top: 0; border-radius: 3px 7px 0 0; }
-  .book-spine::after  { bottom: 0; border-radius: 0 0 7px 3px; }
-
-  /* ═══════════ НАДПИСИ НА КОРЕШКЕ ═══════════ */
-  .book-spine > span {
-    position: absolute;
-    pointer-events: none;
-    z-index: 6;
-  }
-
-  .book-symbol {
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.05em;
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--glow-color), 0 1px 2px rgba(0,0,0,0.95);
-  }
-
-  .book-title {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-90deg);
-    transform-origin: center center;
-    white-space: nowrap;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 1.15em;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    text-shadow:
-      0 0 12px var(--glow-color),
-      0 1px 2px rgba(0,0,0,0.95),
-      0 0 1px var(--accent);
-  }
-
-  .book-flourish {
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.95em;
-    color: var(--accent);
-    opacity: 0.75;
-    text-shadow: 0 0 8px var(--glow-color);
-  }
-
-  /* ═══════════ ЦВЕТА КНИГ ═══════════ */
-  .book--amplification {
-    --leather-1: #4a1010;
-    --leather-2: #240505;
-    --accent: #d4b566;
-    --glow-color: rgba(212, 181, 102, 0.5);
-  }
-
-  .book--poisons {
-    --leather-1: #16261a;
-    --leather-2: #060d06;
-    --accent: #8ac28a;
-    --glow-color: rgba(120, 200, 120, 0.45);
-  }
-
-  /* Пример для новой книги:
-  .book--new {
-    --leather-1: #1a2035;
-    --leather-2: #06080e;
-    --accent: #8090d0;
-    --glow-color: rgba(130, 150, 210, 0.45);
-  }
-  */
-
-  /* ═══════════════════════════════════════════════════════════
-     СТРАНИЦЫ — выезжают из-под корешка при открытии
-     ═══════════════════════════════════════════════════════════ */
-  .book-pages {
-    position: absolute;
-    top: 3.5%;
-    bottom: 3.5%;
-    left: 50%;
-    width: 50%;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 3;
-    perspective: 900px;
-    transform-style: preserve-3d;
-  }
-
-  .page {
-    position: absolute;
-    inset: 0;
-    background-color: var(--page-cream);
-    background-image:
-      repeating-linear-gradient(0deg,
-        transparent 0, transparent 7px,
-        rgba(120, 80, 30, 0.055) 7px, rgba(120, 80, 30, 0.055) 8px),
-      radial-gradient(circle at 20% 15%, rgba(120, 80, 30, 0.10), transparent 45%),
-      radial-gradient(circle at 82% 78%, rgba(120, 80, 30, 0.08), transparent 45%),
-      linear-gradient(90deg, #d9ccb0 0%, var(--page-cream) 40%, #e8dcc1 100%);
-    border: 1px solid rgba(80, 50, 20, 0.4);
-    border-left: 2px solid #6a4a1a;
-    border-radius: 0 4px 4px 0;
-    box-shadow:
-      2px 0 8px rgba(0, 0, 0, 0.35),
-      inset 0 0 22px rgba(120, 80, 30, 0.12);
-    transform-origin: left center;
-    transform: rotateY(0deg);
-    backface-visibility: hidden;
-    will-change: transform;
-  }
-
-  /* ═══════════════════════════════════════════════════════════
-     АНИМАЦИЯ ОТКРЫТИЯ И ПЕРЕЛИСТЫВАНИЯ
-     ═══════════════════════════════════════════════════════════ */
-  .book.opening {
-    animation: bookDiveIn 1.25s cubic-bezier(0.45, 0, 0.35, 1) forwards;
-    transform-origin: center center;
-    pointer-events: none;
-    z-index: 100;
-    filter: none;
-  }
-
-  @keyframes bookDiveIn {
-    0% {
-      transform: translateY(-18px) scale(1);
-      opacity: 1;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
-    15% {
-      transform: translateY(-40px) scale(1.04);
-      opacity: 1;
+
+    body {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        min-height: 100vh;
+        background:
+            radial-gradient(ellipse at top, #2b1d3a 0%, #150c22 40%, #0a0512 100%);
+        color: #e8dcc4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 20px;
+        position: relative;
+        overflow-x: hidden;
     }
-    55% {
-      transform: translateY(-40px) scale(1.18);
-      opacity: 1;
+
+    /* Звёздное небо */
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image:
+            radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+            radial-gradient(1px 1px at 80% 20%, #fff, transparent),
+            radial-gradient(1px 1px at 60% 70%, #ffe9b0, transparent),
+            radial-gradient(1px 1px at 40% 80%, #fff, transparent),
+            radial-gradient(1px 1px at 10% 60%, #fff, transparent),
+            radial-gradient(1px 1px at 90% 50%, #ffe9b0, transparent),
+            radial-gradient(2px 2px at 75% 85%, #fff, transparent),
+            radial-gradient(2px 2px at 30% 15%, #fff, transparent),
+            radial-gradient(1px 1px at 50% 40%, #fff, transparent),
+            radial-gradient(1px 1px at 15% 90%, #ffe9b0, transparent);
+        background-size: 200% 200%;
+        opacity: 0.6;
+        animation: twinkle 8s ease-in-out infinite alternate;
+        pointer-events: none;
+        z-index: 0;
     }
-    85% {
-      transform: translateY(-30px) scale(1.45);
-      opacity: 0.6;
+
+    @keyframes twinkle {
+        from { opacity: 0.4; }
+        to   { opacity: 0.9; }
     }
-    100% {
-      transform: translateY(-30px) scale(1.7);
-      opacity: 0;
+
+    /* Светящийся туман снизу */
+    body::after {
+        content: '';
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 300px;
+        background: radial-gradient(ellipse at bottom, rgba(120, 70, 180, 0.25), transparent 70%);
+        pointer-events: none;
+        z-index: 0;
     }
-  }
 
-  /* Появление страниц */
-  .book.opening .book-pages {
-    animation: pagesAppear 0.35s ease-out 0.08s forwards;
-  }
-
-  @keyframes pagesAppear {
-    0%   { opacity: 0; transform: translateX(-8px); }
-    100% { opacity: 1; transform: translateX(0); }
-  }
-
-  /* Перелистывание — 8 страниц с задержкой каскадом */
-  .book.opening .page:nth-child(1) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.10s forwards; }
-  .book.opening .page:nth-child(2) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.18s forwards; }
-  .book.opening .page:nth-child(3) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.26s forwards; }
-  .book.opening .page:nth-child(4) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.34s forwards; }
-  .book.opening .page:nth-child(5) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.42s forwards; }
-  .book.opening .page:nth-child(6) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.50s forwards; }
-  .book.opening .page:nth-child(7) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.58s forwards; }
-  .book.opening .page:nth-child(8) { animation: flipPage 0.55s cubic-bezier(0.55, 0.05, 0.45, 0.95) 0.66s forwards; }
-
-  @keyframes flipPage {
-    0% {
-      transform: rotateY(0deg);
-      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.35);
+    .container {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 1100px;
     }
-    45% {
-      box-shadow: 6px 0 18px rgba(0, 0, 0, 0.45);
+
+    header {
+        text-align: center;
+        margin-bottom: 70px;
     }
-    100% {
-      transform: rotateY(-172deg);
-      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.25);
+
+    .ornament {
+        font-size: 1.4rem;
+        color: #c9a24a;
+        letter-spacing: 1.5rem;
+        margin-bottom: 20px;
+        opacity: 0.8;
     }
-  }
 
-  /* ═══════════ МЯГКОЕ ЗАТЕМНЕНИЕ ПЕРЕД ПЕРЕХОДОМ ═══════════ */
-.page-flash {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 0%,
-    rgba(20, 10, 5, 0.35) 55%,
-    rgba(10, 5, 2, 0.85) 100%
-  );
-  opacity: 0;
-  pointer-events: none;
-  z-index: 9999;
-  transition: opacity 0.7s ease-in 0.55s;
-}
-.page-flash.active { opacity: 1; }
+    h1 {
+        font-size: clamp(2rem, 5vw, 3.6rem);
+        font-weight: 400;
+        letter-spacing: 0.15em;
+        color: #f5e8c8;
+        text-shadow:
+            0 0 20px rgba(201, 162, 74, 0.5),
+            0 0 40px rgba(201, 162, 74, 0.2);
+        margin-bottom: 15px;
+        font-variant: small-caps;
+    }
 
-  /* ═══════════ ПОДСКАЗКА ═══════════ */
-  .hint {
-    margin-top: 40px;
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 0.9em;
-    color: #6a4e1c;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    animation: pulseHint 4s ease-in-out infinite;
-    position: relative;
-    z-index: 2;
-  }
+    .subtitle {
+        font-size: 1rem;
+        font-style: italic;
+        color: #a89a7c;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+    }
 
-  @keyframes pulseHint {
-    0%, 100% { opacity: 0.5; }
-    50%      { opacity: 0.85; }
-  }
+    .divider {
+        width: 200px;
+        height: 1px;
+        margin: 30px auto 0;
+        background: linear-gradient(90deg, transparent, #c9a24a, transparent);
+        position: relative;
+    }
 
-  /* ═══════════ ФУТЕР ═══════════ */
-  .footer {
-    margin-top: 60px;
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    color: #5a3f18;
-    letter-spacing: 0.1em;
-    font-size: 0.82em;
-    opacity: 0.7;
-    position: relative;
-    z-index: 2;
-  }
-  .footer .divider { margin: 0 12px; color: #3a2508; }
+    .divider::after {
+        content: '✦';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #150c22;
+        color: #c9a24a;
+        padding: 0 12px;
+        font-size: 0.9rem;
+    }
 
-  /* ═══════════ АДАПТИВ ═══════════ */
-  @media (max-width: 780px) {
-    body { padding: 30px 12px 50px; }
-    .library-header h1 { font-size: 2em; }
-    .library-tagline { font-size: 0.75em; letter-spacing: 0.15em; }
-    .books-stage { gap: 30px; padding: 15px 25px 0; min-height: 400px; }
-    .book { width: 115px; height: 380px; }
-    .book-title { font-size: 0.95em; }
-    .book-symbol { font-size: 0.9em; }
-    .book-flourish { font-size: 0.8em; }
-    .plank { height: 22px; }
-    .plank::before, .plank::after { width: 26px; height: 32px; }
-    .shelf--empty .books-stage { min-height: 100px; }
-  }
+    /* --- Сетка карточек --- */
+    .menu {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
 
-  @media (max-width: 460px) {
-    .books-stage { gap: 20px; padding: 10px 15px 0; min-height: 330px; }
-    .book { width: 95px; height: 315px; }
-    .book-title { font-size: 0.82em; letter-spacing: 0.03em; }
-    .book-symbol { font-size: 0.8em; }
-    .book-flourish { font-size: 0.7em; }
-    .library-header h1 { font-size: 1.6em; }
-  }
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 240px;
+        padding: 30px 28px;
+        text-decoration: none;
+        color: inherit;
+        border-radius: 6px;
+        background: linear-gradient(160deg, rgba(40, 25, 60, 0.85), rgba(20, 10, 30, 0.9));
+        border: 1px solid rgba(201, 162, 74, 0.25);
+        overflow: hidden;
+        transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+        isolation: isolate;
+    }
 
-  /* ═══════════ УМЕНЬШЕНИЕ АНИМАЦИИ ═══════════ */
-  @media (prefers-reduced-motion: reduce) {
-    .book { transition: none; }
-    .book.opening { animation-duration: 0.3s; }
-    .book.opening .page { animation: none; }
-    .book.opening .page:nth-child(1) { opacity: 0.9; }
-    .page-flash { transition: opacity 0.15s ease-in 0.2s; }
-    .hint { animation: none; opacity: 0.7; }
-  }
+    /* Каждый блок с уникальным оттенком */
+    .card:nth-child(1)::before { background-image: radial-gradient(circle at 80% 20%, rgba(180, 60, 60, 0.45), transparent 60%); }
+    .card:nth-child(2)::before { background-image: radial-gradient(circle at 80% 20%, rgba(60, 120, 200, 0.45), transparent 60%); }
+    .card:nth-child(3)::before { background-image: radial-gradient(circle at 80% 20%, rgba(70, 170, 100, 0.45), transparent 60%); }
+    .card:nth-child(4)::before { background-image: radial-gradient(circle at 80% 20%, rgba(200, 140, 50, 0.45), transparent 60%); }
+    .card:nth-child(5)::before { background-image: radial-gradient(circle at 80% 20%, rgba(150, 70, 190, 0.45), transparent 60%); }
+
+    /* Внутреннее свечение-пятно */
+    .card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.6;
+        z-index: -1;
+        transition: opacity 0.45s ease, transform 0.6s ease;
+    }
+
+    /* Тонкая рамка-подсветка */
+    .card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        background: linear-gradient(135deg, rgba(201, 162, 74, 0.6), transparent 40%, transparent 60%, rgba(201, 162, 74, 0.4)) border-box;
+        -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+        pointer-events: none;
+        opacity: 0.5;
+        transition: opacity 0.4s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(201, 162, 74, 0.7);
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.6),
+            0 0 30px rgba(201, 162, 74, 0.25);
+    }
+
+    .card:hover::before {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+
+    .card:hover::after {
+        opacity: 1;
+    }
+
+    .card-icon {
+        font-size: 2.2rem;
+        color: #c9a24a;
+        margin-bottom: auto;
+        line-height: 1;
+        text-shadow: 0 0 15px rgba(201, 162, 74, 0.5);
+        transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-icon {
+        transform: scale(1.15) rotate(-4deg);
+    }
+
+    .card-title {
+        font-size: 1.35rem;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        color: #f5e8c8;
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+
+    .card-desc {
+        font-size: 0.88rem;
+        color: #a89a7c;
+        font-style: italic;
+        line-height: 1.5;
+        letter-spacing: 0.02em;
+    }
+
+    .card-arrow {
+        position: absolute;
+        top: 30px;
+        right: 28px;
+        font-size: 1.1rem;
+        color: rgba(201, 162, 74, 0.4);
+        transition: all 0.4s ease;
+    }
+
+    .card:hover .card-arrow {
+        color: #c9a24a;
+        transform: translate(4px, -4px);
+    }
+
+    footer {
+        margin-top: 80px;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #6b5f48;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        z-index: 1;
+        position: relative;
+    }
+
+    @media (max-width: 600px) {
+        body { padding: 40px 15px; }
+        header { margin-bottom: 45px; }
+        .ornament { letter-spacing: 0.8rem; }
+        .menu { gap: 20px; }
+        .card { min-height: 200px; padding: 24px 22px; }
+    }
 </style>
 </head>
 <body>
 
-<!-- ══════════════ ШАПКА ══════════════ -->
-<header class="library-header">
-  <h1>Библиотека<br>Рионисии Луфар</h1>
-  <div class="ornament"><span class="diamond"></span></div>
-  <p class="library-tagline">· трактаты из личного архива ·</p>
-</header>
+<div class="container">
+    <header>
+        <div class="ornament">✦ ✦ ✦</div>
+        <h1>Хроники Эльхара</h1>
+        <p class="subtitle">Архивы мира Мерион</p>
+        <div class="divider"></div>
+    </header>
 
-<!-- ══════════════ БИБЛИОТЕКА ══════════════ -->
-<div class="library">
-
-  <!-- ═══ ПОЛКА I · ДВА ТРАКТАТА ═══ -->
-  <section class="shelf">
-    <div class="books-stage">
-
-      <!-- 
-        ИМЯ ФАЙЛА №1: проверьте href
-      -->
-      <a href="tractat-amplification.html"
-         class="book book--amplification"
-         aria-label="Открыть: Об Амплификации"
-         title="Об Амплификации · Рионисия Луфар">
-        <div class="book-spine">
-          <span class="book-symbol">❦</span>
-          <span class="book-title">Об Амплификации</span>
-          <span class="book-flourish">❧</span>
-        </div>
-        <div class="book-pages" aria-hidden="true">
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-        </div>
-      </a>
-
-      <!-- 
-        ИМЯ ФАЙЛА №2: проверьте href
-      -->
-      <a href="tractat-poisons.html"
-         class="book book--poisons"
-         aria-label="Открыть: О Смертных Ядах"
-         title="О Смертных Ядах · Рионисия Луфар">
-        <div class="book-spine">
-          <span class="book-symbol">☠</span>
-          <span class="book-title">О Смертных Ядах</span>
-          <span class="book-flourish">❧</span>
-        </div>
-        <div class="book-pages" aria-hidden="true">
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-          <div class="page"></div>
-        </div>
-      </a>
-
-    </div>
-    <div class="plank"></div>
-  </section>
-
-  <!-- ═══ ПОЛКА II · ПУСТАЯ ═══ -->
-  <section class="shelf shelf--empty">
-    <div class="books-stage">
-      <!-- 
-        ╔═══════════════════════════════════════════════╗
-        ║  МЕСТО ДЛЯ НОВОЙ КНИГИ — раскомментируйте     ║
-        ╚═══════════════════════════════════════════════╝
-
-        <a href="new-tractat.html"
-           class="book book--new"
-           aria-label="Открыть: Название"
-           title="Название · Рионисия Луфар">
-          <div class="book-spine">
-            <span class="book-symbol">✦</span>
-            <span class="book-title">Название</span>
-            <span class="book-flourish">❧</span>
-          </div>
-          <div class="book-pages" aria-hidden="true">
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-          </div>
+    <nav class="menu">
+        <a href="History/history-elhar.html" class="card">
+            <span class="card-icon">📜</span>
+            <span class="card-arrow">↗</span>
+            <span class="card-title">История Эльхара</span>
+            <span class="card-desc">Летописи древних эпох, падение королевств и рождение новых легенд</span>
         </a>
 
-        Не забудьте добавить CSS-правило .book--new
-        в разделе «ЦВЕТА КНИГ» выше.
-      -->
-    </div>
-    <div class="plank"></div>
-  </section>
-
-  <!-- ═══ ПОЛКА III · ПУСТАЯ ═══ -->
-  <section class="shelf shelf--empty">
-    <div class="books-stage">
-      <!-- 
-        ╔═══════════════════════════════════════════════╗
-        ║  МЕСТО ДЛЯ НОВОЙ КНИГИ — раскомментируйте     ║
-        ╚═══════════════════════════════════════════════╝
-
-        <a href="new-tractat.html"
-           class="book book--new"
-           aria-label="Открыть: Название"
-           title="Название · Рионисия Луфар">
-          <div class="book-spine">
-            <span class="book-symbol">✦</span>
-            <span class="book-title">Название</span>
-            <span class="book-flourish">❧</span>
-          </div>
-          <div class="book-pages" aria-hidden="true">
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-            <div class="page"></div>
-          </div>
+        <a href="BiblioRionisi/library-rionisia.html" class="card">
+            <span class="card-icon">📖</span>
+            <span class="card-arrow">↗</span>
+            <span class="card-title">Библиотека Рионисии Луфар</span>
+            <span class="card-desc">Собрание тайных знаний, гримуаров и запретных трактатов</span>
         </a>
-      -->
-    </div>
-    <div class="plank"></div>
-  </section>
 
+        <a href="geography-merion.html" class="card">
+            <span class="card-icon">🗺️</span>
+            <span class="card-arrow">↗</span>
+            <span class="card-title">География Мериона</span>
+            <span class="card-desc">Карты земель, горные хребты, моря и неизведанные края</span>
+        </a>
+
+        <a href="player-characters.html" class="card">
+            <span class="card-icon">⚔️</span>
+            <span class="card-arrow">↗</span>
+            <span class="card-title">Персонажи Игроков</span>
+            <span class="card-desc">Герои, чьи судьбы вплетены в ткань этого мира</span>
+        </a>
+
+        <a href="npc.html" class="card">
+            <span class="card-icon">🎭</span>
+            <span class="card-arrow">↗</span>
+            <span class="card-title">НПС</span>
+            <span class="card-desc">Мастера, торговцы, союзники и враги, встречающиеся на пути</span>
+        </a>
+    </nav>
+
+    <footer>✦ Добро пожаловать в архив ✦</footer>
 </div>
-
-<!-- ══════════════ ПОДСКАЗКА ══════════════ -->
-<p class="hint">— прикоснитесь к корешку —</p>
-
-<!-- ══════════════ ФУТЕР ══════════════ -->
-<footer class="footer">
-  Из личного архива семьи Луфар
-  <span class="divider">✦</span>
-  Город Рассвета
-</footer>
-
-<!-- ══════════════ ПЕРГАМЕНТНЫЙ ПЕРЕХОД ══════════════ -->
-<div id="pageFlash" class="page-flash"></div>
-
-<!-- ══════════════ СКРИПТ ══════════════ -->
-<script>
-  (function () {
-    'use strict';
-    const flash = document.getElementById('pageFlash');
-    let navigating = false;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const openDuration = reduceMotion ? 350 : 1250;
-
-    document.querySelectorAll('a.book').forEach(function (book) {
-      book.addEventListener('click', function (e) {
-        if (navigating) { e.preventDefault(); return; }
-
-        const href = book.getAttribute('href');
-        if (!href) return;
-
-        e.preventDefault();
-        navigating = true;
-
-        // Запускаем раскрытие книги и перелистывание страниц
-        book.classList.add('opening');
-
-        // Плавное погружение в пергаментный цвет страниц
-        if (flash) flash.classList.add('active');
-
-        // Переход после завершения анимации
-        setTimeout(function () {
-          window.location.href = href;
-        }, openDuration);
-      });
-    });
-  })();
-</script>
 
 </body>
 </html>
