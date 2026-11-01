@@ -19,17 +19,53 @@
 
     *{box-sizing:border-box;}
 
-    html{scroll-behavior:smooth;}
+    html{scroll-behavior:smooth; scroll-padding-top:80px;}
 
     body{
         margin:0;
         min-height:100vh;
-        background:#080100;
+        background:
+            radial-gradient(circle at 15% 0%, #2a0a10 0%, transparent 55%),
+            radial-gradient(circle at 85% 100%, #3a1508 0%, transparent 50%),
+            #080100;
         color:var(--text);
         font-family:"Georgia","Times New Roman",serif;
         overflow-x:hidden;
         position:relative;
         padding:0 12px;
+    }
+
+    /* ============ КНОПКА "НАЗАД" ============ */
+    .back-btn{
+        position:fixed;
+        top:24px; left:24px;
+        z-index:100;
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:9px 16px;
+        border-radius:10px;
+        font-family:system-ui,sans-serif;
+        font-size:.82rem;
+        letter-spacing:.08em;
+        text-transform:uppercase;
+        text-decoration:none;
+        color:var(--gold);
+        background:rgba(26,2,5,.85);
+        border:1px solid rgba(232,184,115,.45);
+        backdrop-filter:blur(6px);
+        -webkit-backdrop-filter:blur(6px);
+        transition:color .25s, border-color .25s, background .25s,
+                   transform .2s, box-shadow .25s;
+        box-shadow:0 4px 18px rgba(0,0,0,.55);
+    }
+    .back-btn:hover, .back-btn:focus{
+        color:var(--gold-bright);
+        border-color:rgba(255,216,155,.9);
+        background:rgba(74,10,18,.92);
+        transform:translateX(-2px);
+        box-shadow:0 0 22px rgba(255,110,0,.4);
+        outline:none;
     }
 
     /* ============ ФОН: ПЫЛАЮЩИЙ АД ============ */
@@ -419,6 +455,12 @@
 
     /* ============ АДАПТИВ ============ */
     @media (max-width:640px){
+        .back-btn{
+            top:14px; left:14px;
+            padding:7px 12px;
+            font-size:.72rem;
+            letter-spacing:.1em;
+        }
         .scroll{
             padding:38px 20px 50px;
             margin:26px auto 60px;
@@ -441,6 +483,9 @@
 </style>
 </head>
 <body>
+
+<!-- ================= КНОПКА "НАЗАД" ================= -->
+<a class="back-btn" href="../Plaga.html">← Назад</a>
 
 <!-- ================= ФОН: ГОРЯЩИЙ АД ================= -->
 <div class="hell" aria-hidden="true"></div>
@@ -471,14 +516,13 @@
 
         <!-- Ссылка на изображение -->
         <div class="portrait">
-            <a href=barsodi.jpg
+            <a href="barsodi.jpg"
                target="_blank"
                rel="noopener noreferrer"
                title="Открыть изображение в полном размере">
-				<img src="barsodi.jpg" alt="Портрет Максимилиана Барсоди">
-                
+                <img src="barsodi.jpg" alt="Портрет Максимилиана Барсоди">
             </a>
-        </div>        
+        </div>
     </header>
 
     <!-- ================= ПАРАМЕТРЫ ================= -->
